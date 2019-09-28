@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Building Hadoop&lt;br&gt;（搭建Hadoop） - JacksonYuu - Personal Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="There are three environments for building Hadoop: single-machine mode, pseudo-distributed and fully,"> 
+    <meta name="author" content="JacksonYuu"> 
+    <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">JacksonYuu - Personal Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Building Hadoop<br>（搭建Hadoop）</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Building Hadoop<br>（搭建Hadoop）</h1>
+        <div class="stuff">
+            <span>九月 28, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/install/">install</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>There are three environments for building Hadoop: single-machine mode, pseudo-distributed and fully distributed. This paper introduces how to build a fully distributed Hadoop environment with virtual machines. There are mainly NameNode and Econdary NameNode in the same node, DataNode in three nodes.</p>
+<p>(搭建Hadoop的环境有三种：单机模式，伪分布式，全分布式。在这里介绍的是用虚拟机去搭建全分布式的Hadoop环境。主要有NameNode和SecondaryNameNode在同一个节点，DataNode分别在三个节点。)</p>
+<p>Download all files（所有文件下载）：<a href="https://pan.baidu.com/s/1v40mdr4JTedgmNSaNz_mrg" target="_blank" rel="noopener">https://pan.baidu.com/s/1v40mdr4JTedgmNSaNz_mrg</a> </p>
+<p>Extraction Code（提取码）：ksfu </p>
+<h3 id="1、First-step（第一步）"><a href="#1、First-step（第一步）" class="headerlink" title="1、First step（第一步）"></a>1、First step（第一步）</h3><p>The software used to build virtual machines here is VirtualBox. Of course, you can also use VM.CentOS 7.0 for virtual systems.Here is the download address.Because VM needs to be cracked, the way to crack is provided here.The software for remote connection to virtual machine is SecureCRT and the software for remote data upload is SecureFX. These two can be directly searched, downloaded and cracked online.And the mirror image of CentOS.</p>
+<p>（这里使用搭建虚拟机的软件是VirtualBox，当然你们也可以用VM。虚拟系统使用的CentOS7.0。下面是下载地址。远程连接虚拟机的软件是 SecureCRT以及远程数据上传的软件是 SecureFX。这两个可以直接在网上搜索下载并破解。还有就是CentOS的镜像。）</p>
+<p>VirtualBox：<a href="https://pan.baidu.com/s/1Yt6Shb4bsHsq9y2vmeOdgQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1Yt6Shb4bsHsq9y2vmeOdgQ</a> </p>
+<p>Extraction Code（提取码）：mw6o </p>
+<p>VM：<a href="https://pan.baidu.com/s/1ByemO3t2FNau-BiX8V9imA" target="_blank" rel="noopener">https://pan.baidu.com/s/1ByemO3t2FNau-BiX8V9imA</a>  </p>
+<p>Extraction Code（提取码）：9jzw </p>
+<p>Cracking links（破解链接）：<a href="https://mp.weixin.qq.com/s/m6rrx5Q3alhkQCK1Feja_Q" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/m6rrx5Q3alhkQCK1Feja_Q</a></p>
+<p>CentOS：<a href="https://pan.baidu.com/s/1pPBIHc_0pqAfAilv2BiObA" target="_blank" rel="noopener">https://pan.baidu.com/s/1pPBIHc_0pqAfAilv2BiObA</a> </p>
+<p>Extraction Code（提取码）：7uqf </p>
+<h3 id="2、Second-Step（第二步）"><a href="#2、Second-Step（第二步）" class="headerlink" title="2、Second Step（第二步）"></a>2、Second Step（第二步）</h3><p>Download Hadoop’s tar package. Because Hadoop’s build is based on Java environment, it also needs to download jdk. The versions used here are hadoop-2.7.3 and jdk1.8. Here is the download address.</p>
+<p>（下载Hadoop的tar包，由于Hadoop的搭建要基于Java环境之下搭建，所以还需要下载jdk，这里用的版本为hadoop-2.7.3以及jdk1.8，下面是下载地址。）</p>
+<p>Hadoop：<a href="https://pan.baidu.com/s/1gFROALtKSriLL3sGdKTadQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1gFROALtKSriLL3sGdKTadQ</a>  </p>
+<p>Extraction Code（提取码）：8yak </p>
+<p>JDK：链接：<a href="https://pan.baidu.com/s/1l6F5JpFrZN2pLpXGvpOHpQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1l6F5JpFrZN2pLpXGvpOHpQ</a>  </p>
+<p>Extraction Code（提取码）：g0cw </p>
+<h3 id="3、Third-Step（第三步）"><a href="#3、Third-Step（第三步）" class="headerlink" title="3、Third Step（第三步）"></a>3、Third Step（第三步）</h3>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r='JacksonYuu.github.io'
+        data-o='JacksonYuu'
+        data-a='JacksonYuu'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
