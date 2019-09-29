@@ -33,7 +33,7 @@
     <div id="single">
     <div id="top" style="display: block;">
     <div class="bar" style="width: 0;"></div>
-    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://JacksonYuu.github.io"></a>
     <div title="播放/暂停" class="icon-play"></div>
     <h3 class="subtitle">Building Hadoop<br>（搭建Hadoop）</h3>
     <div class="social">
@@ -81,7 +81,45 @@
 <p>Extraction Code（提取码）：8yak </p>
 <p>JDK：链接：<a href="https://pan.baidu.com/s/1l6F5JpFrZN2pLpXGvpOHpQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1l6F5JpFrZN2pLpXGvpOHpQ</a>  </p>
 <p>Extraction Code（提取码）：g0cw </p>
-<h3 id="3、Third-Step（第三步）"><a href="#3、Third-Step（第三步）" class="headerlink" title="3、Third Step（第三步）"></a>3、Third Step（第三步）</h3>
+<h3 id="3、Third-Step（第三步）"><a href="#3、Third-Step（第三步）" class="headerlink" title="3、Third Step（第三步）"></a>3、Third Step（第三步）</h3><h4 id="（1）create（创建）"><a href="#（1）create（创建）" class="headerlink" title="（1）create（创建）"></a>（1）create（创建）</h4><p>Start with CentOS 7.0 to create a virtual machine for the Linux system (create four, one NameNode, and three DataNodes).</p>
+<p>（先用CentOS7.0创建Linux系统的虚拟机（创建四台，一台NameNode和SecondaryNameNode，三台DataNode）。）</p>
+<p><img src="/image/create-first.png" alt></p>
+<p><img src="/image/create-second.png" alt></p>
+<p>Then go straight to the next step, and finally start the virtual opportunity to install the Linux system automatically.Modify the network configuration after installation.Finally, you need to modify the network adapter for windows</p>
+<p>（然后一直点下一步，最后启动虚拟机会自动安装Linux系统。安装完成之后修改一下网络配置。最后还要修改windows的网络适配器。）</p>
+<p><img src="/image/create-third.png" alt></p>
+<p><img src="/image/create-fourth.png" alt></p>
+<p><img src="/image/create-fifth.png" alt></p>
+<p>After login to the virtual machine to modify the IP address, you need to modify the IP of the network adapter just set up under the same network segment (note: IP of four virtual machines,and then you need to modify the name of a virtual machine and the IP mapping.</p>
+<p>(之后登陆虚拟机修改ip地址，需要修改成刚刚设置的windows的网络适配器的ip在同一网段下面（注：四台虚拟机的ip要在同一网段，但是ip要各不相同），然后还要修改一个虚拟机的名称以及ip映射。)</p>
+<p><img src="/image/create-sixth.png" alt></p>
+<p><img src="/image/create-seventh.png" alt></p>
+<p><img src="/image/create-eighth.png" alt></p>
+<p><img src="/image/create-ninth.png" alt></p>
+<p>Finally, CRT is used to connect the virtual machine to see if the connection is successful.</p>
+<p>（最后使用CRT连接虚拟机，看是否能够连接成功！）</p>
+<p><img src="/image/create-tenth.png" alt></p>
+<h4 id="（2）upload（上传）"><a href="#（2）upload（上传）" class="headerlink" title="（2）upload（上传）"></a>（2）upload（上传）</h4><p>After the connection is successful, the tar package downloaded from windows is uploaded to the virtual machine (note: only need to configure the NameNode virtual machine, the rest of the DataNode virtual machine can carry out remote data transmission through scp.Jdk’s tar package uploads the same as hadoop’s tar package.)</p>
+<p>（连接成功之后便是将windows下载的tar包上传到虚拟机当中（注：只需要配置NameNode虚拟机，其余的DataNode虚拟机可以通过scp进行远程数据传输，jdk的tar包和hadoop的tar包一样的上传））</p>
+<p><img src="/image/upload-first.png" alt></p>
+<p><img src="/image/upload-second.png" alt></p>
+<p><img src="/image/upload-third.png" alt></p>
+<p><img src="/image/upload-fourth.png" alt></p>
+<h3 id="（3）configure（配置）"><a href="#（3）configure（配置）" class="headerlink" title="（3）configure（配置）"></a>（3）configure（配置）</h3><p>Configuration files need to be modified: hadoop-env.sh, core-site.xml, hdfs-site.xml, slaves, mapred-site.xml.template changed to mapred-site.xml, yarn-site.xml</p>
+<p>（需要修改的配置文件：hadoop-env.sh、core-site.xml、hdfs-site.xml、slaves、mapred-site.xml.template修改为mapred-site.xml、yarn-site.xml）</p>
+<p><img src="/image/configure-first.png" alt></p>
+<p><img src="/image/configure-second.png" alt></p>
+<p><img src="/image/configure-third.png" alt></p>
+<p><img src="/image/configure-fourth.png" alt></p>
+<p><img src="/image/configure-fifth.png" alt></p>
+<p><img src="/image/configure-sixth.png" alt></p>
+<p>NameNode formatting using [root@master hadoop]# hdfs namenode-format(Note: Format only the first time NameNode is started)</p>
+<p>（使用[root@master hadoop]# hdfs namenode -format进行NameNode格式化（注：只有第一次启动NameNode时要格式化））</p>
+<p>Start the Hadoop cluster at the NameNode node using [root@master hadoop]# start-all.sh.</p>
+<p>（在NameNode节点启动Hadoop集群，使用[root@master hadoop]# start-all.sh ）</p>
+<p>Finally, using JPS in each virtual machine, you can see how the Hadoop cluster works.</p>
+<p>（最后在每个虚拟机中使用jps即可看到Hadoop集群的运行状况。）</p>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
