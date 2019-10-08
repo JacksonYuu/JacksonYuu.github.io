@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="What is Hadoop？（什么是Hadoop?）Hadoop is a distributed system infrastructure developed by the Apache Fo,"> 
+    <meta name="description" content="What is Hadoop？（什么是Hadoop?）Hadoop is a distributed infrastructure developed by the Apache Foundatio,"> 
     <meta name="author" content="JacksonYuu"> 
     <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -62,17 +62,17 @@
 
         </div>
         <div class="content markdown">
-            <h1 id="What-is-Hadoop？（什么是Hadoop-）"><a href="#What-is-Hadoop？（什么是Hadoop-）" class="headerlink" title="What is Hadoop？（什么是Hadoop?）"></a>What is Hadoop？（什么是Hadoop?）</h1><p>Hadoop is a distributed system infrastructure developed by the Apache Foundation. The core design of Hadoop’s framework is HDFS and MapReduce. HDFS provides storage for massive data, while MapReduce provides computation for massive data.</p>
-<p>(Hadoop是一个由Apache基金会所开发的分布式基础架构。Hadoop的框架最核心的设计就是：HDFS和MapReduce。HDFS为海量的数据提供了存储，而MapReduce则为海量的数据提供了计算。)</p>
-<h1 id="Advantages-of-Hadoop-Hadoop的优点"><a href="#Advantages-of-Hadoop-Hadoop的优点" class="headerlink" title="Advantages of Hadoop(Hadoop的优点)"></a>Advantages of Hadoop(Hadoop的优点)</h1><h2 id="1、High-reliability（高可靠性）"><a href="#1、High-reliability（高可靠性）" class="headerlink" title="1、High reliability（高可靠性）"></a>1、High reliability（高可靠性）</h2><p>Since multiple copies of working data are maintained when storing data, it is ensured that processing can be redistributed to failed nodes.</p>
+            <h3 id="What-is-Hadoop？（什么是Hadoop-）"><a href="#What-is-Hadoop？（什么是Hadoop-）" class="headerlink" title="What is Hadoop？（什么是Hadoop?）"></a>What is Hadoop？（什么是Hadoop?）</h3><p>Hadoop is a distributed infrastructure developed by the Apache Foundation for distributed processing of large amounts of data. The core design of Hadoop’s framework is HDFS and MapReduce. HDFS provides storage for massive data, while MapReduce provides computation for massive data.</p>
+<p>(Hadoop是一个由Apache基金会所开发的，能够对大量数据进行分布式处理的分布式基础架构。Hadoop的框架最核心的设计就是：HDFS和MapReduce。HDFS为海量的数据提供了存储，而MapReduce则为海量的数据提供了计算。)</p>
+<h3 id="Advantages-of-Hadoop-Hadoop的优点"><a href="#Advantages-of-Hadoop-Hadoop的优点" class="headerlink" title="Advantages of Hadoop(Hadoop的优点)"></a>Advantages of Hadoop(Hadoop的优点)</h3><h4 id="1、High-reliability（高可靠性）"><a href="#1、High-reliability（高可靠性）" class="headerlink" title="1、High reliability（高可靠性）"></a>1、High reliability（高可靠性）</h4><p>Since multiple copies of working data are maintained when storing data, it is ensured that processing can be redistributed to failed nodes.</p>
 <p>（由于在存储数据的时候会有维护多个工作数据副本，确保能够针对失败的节点重新分布处理。）</p>
-<h2 id="2、High-scalability（高扩展性）"><a href="#2、High-scalability（高扩展性）" class="headerlink" title="2、High scalability（高扩展性）"></a>2、High scalability（高扩展性）</h2><p>Since the stored data is stored on multiple machines in block form, the number of horizontally extended machines can store more data, which is much larger than the traditional storage on a single machine.</p>
+<h4 id="2、High-scalability（高扩展性）"><a href="#2、High-scalability（高扩展性）" class="headerlink" title="2、High scalability（高扩展性）"></a>2、High scalability（高扩展性）</h4><p>Since the stored data is stored on multiple machines in block form, the number of horizontally extended machines can store more data, which is much larger than the traditional storage on a single machine.</p>
 <p>（由于存储数据是以块的形式存储在多个机器上面，横向扩展机器的个数便能够存储更多的数据，相对于传统的存储在单一机器上面来说扩展会更加的高效和方便。）</p>
-<h2 id="3、Efficiency（高效性）"><a href="#3、Efficiency（高效性）" class="headerlink" title="3、Efficiency（高效性）"></a>3、Efficiency（高效性）</h2><p>Each node can dynamically transmit data, and ensure the dynamic balance of each node. Similarly, it can find the required data more quickly when responding to the client’s request.</p>
+<h4 id="3、Efficiency（高效性）"><a href="#3、Efficiency（高效性）" class="headerlink" title="3、Efficiency（高效性）"></a>3、Efficiency（高效性）</h4><p>Each node can dynamically transmit data, and ensure the dynamic balance of each node. Similarly, it can find the required data more quickly when responding to the client’s request.</p>
 <p>（个个节点之间能够动态的传输数据，并且保证个个节点的动态平衡，同样在响应客户端的请求时能够更加迅速的找到所需的数据。）</p>
-<h2 id="4-High-fault-tolerance（高容错性）"><a href="#4-High-fault-tolerance（高容错性）" class="headerlink" title="4.High fault tolerance（高容错性）"></a>4.High fault tolerance（高容错性）</h2><p>Because there is redundant storage when storing data, and when the client requests to read the data, it can check the data. If the data error is detected, the backup data of the data block will be read, and the redundancy of the stored data will be kept to the set value.</p>
+<h4 id="4-High-fault-tolerance（高容错性）"><a href="#4-High-fault-tolerance（高容错性）" class="headerlink" title="4.High fault tolerance（高容错性）"></a>4.High fault tolerance（高容错性）</h4><p>Because there is redundant storage when storing data, and when the client requests to read the data, it can check the data. If the data error is detected, the backup data of the data block will be read, and the redundancy of the stored data will be kept to the set value.</p>
 <p>（由于在存储数据的时候是具有冗余存储的，并且在客户端请求读取数据的时候具有对数据的检查，如果检查出数据错误，那么就会将这个数据块的备份数据进行读取，同时将存储数据的冗余数保持到设置的值。）</p>
-<h2 id="5、Low-cost（低成本）"><a href="#5、Low-cost（低成本）" class="headerlink" title="5、Low cost（低成本）"></a>5、Low cost（低成本）</h2><p>Compared with traditional storage, Hadoop can be a common PC for data storage machines. And Hadoop is an open source product that can be quickly used in the market.</p>
+<h4 id="5、Low-cost（低成本）"><a href="#5、Low-cost（低成本）" class="headerlink" title="5、Low cost（低成本）"></a>5、Low cost（低成本）</h4><p>Compared with traditional storage, Hadoop can be a common PC for data storage machines. And Hadoop is an open source product that can be quickly used in the market.</p>
 <p>（相对于传统存储来说，Hadoop对于数据存储的机器可以是普通的pc机。而且Hadoop是一种开源的产品，能够快速的运用在市场当中。）</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
