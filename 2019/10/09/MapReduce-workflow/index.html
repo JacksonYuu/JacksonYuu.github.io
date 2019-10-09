@@ -10,7 +10,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    
+    <meta name="description" content="MapReduce workflow（MapReduce的工作流程）
+
+There is no communication between different Map tasks
+（不同的Map任务,"> 
     <meta name="author" content="JacksonYuu"> 
     <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -62,7 +65,66 @@
 
         </div>
         <div class="content markdown">
-            
+            <h3 id="MapReduce-workflow（MapReduce的工作流程）"><a href="#MapReduce-workflow（MapReduce的工作流程）" class="headerlink" title="MapReduce workflow（MapReduce的工作流程）"></a>MapReduce workflow（MapReduce的工作流程）</h3><p><img src="/image/MapReduce-third.png" alt></p>
+<ul>
+<li><p>There is no communication between different Map tasks</p>
+<p>（不同的Map任务之间不会进行通信）</p>
+</li>
+<li><p>There will be no exchange of information between different Reduce tasks</p>
+<p>（不同的Reduce任务之间也不会发生任何信息的交换）</p>
+</li>
+<li><p>Users cannot send messages explicitly from one machine to another</p>
+<p>（用户不能显式地从一台机器向另一台机器发送消息）</p>
+</li>
+<li><p>All data exchange is achieved through MapReduce framework itself</p>
+<p>（所有的数据交换都是通过MapReduce框架自身去实现的）</p>
+</li>
+</ul>
+<h3 id="MapReduce-implementation-phases（MapReduce各个执行阶段）"><a href="#MapReduce-implementation-phases（MapReduce各个执行阶段）" class="headerlink" title="MapReduce implementation phases（MapReduce各个执行阶段）"></a>MapReduce implementation phases（MapReduce各个执行阶段）</h3><p><img src="/image/MapReduce-fourth.png" alt></p>
+<ol>
+<li><p>Firstly, the InputFormat module is used to load the files of distributed file system. At the same time, the files are Split sliced (logically sliced) and the Record Read (Record Reader) is used to read the corresponding blocks of distributed file system according to the slicing information.</p>
+<p>（首先利用InputFormat模块来加载分布式文件系统的文件，同时将文件进行Split分片（逻辑上的切分），并且让Record Read（记录阅读器）来根据分片信息去读取分布式文件系统对应的块）</p>
+</li>
+<li><p>Secondly, the read information is sent to the Map function to process the information in the form of &lt;key, value&gt; logic written by the user, and then the information is processed again in the form of &lt;key, value&gt; Shuffle process (partition, sorting, merging and merging of file information).</p>
+<p>（其次将读取的信息以&lt;key, value&gt;的信息发送给Map函数进行用户所撰写的逻辑去处理信息，然后处理完成之后的信息再次以&lt;key, value&gt;的形式来进行Shuffle过程（将文件信息进行分区、排序、合并、归并））</p>
+</li>
+<li><p>Finally, the file after Shuffle is distributed to the corresponding Reduce task in the form of &lt;key, value-list&gt; to carry out the processing logic in the Reduce function written by the user. After processing, the output file is checked and stored with the help of OutputFormat module.</p>
+<p>（最后完成Shuffle之后的文件以&lt;key, value-list&gt;的形式，分发给对应的Reduce任务，去进行用户撰写的Reduce函数里面的处理逻辑，完成处理之后借助于OutputFormat模块来进行输出文件的检查并存储）</p>
+</li>
+</ol>
+<h3 id="About-Split（关于分片）"><a href="#About-Split（关于分片）" class="headerlink" title="About Split（关于分片）"></a>About Split（关于分片）</h3><p>HDFS stores data in a fixed size block, while for MapReduce, the processing unit is split. Split is a logical concept, which contains only some metadata information, such as data start location, data length, data node, etc. Its partitioning method is entirely determined by the user himself. In most cases, split size is best the same as the block size, which saves the unnecessary overhead of data transmission.</p>
+<p>（ HDFS 以固定大小的block 为基本单位存储数据，而对于MapReduce 而言，其处理单位是split。split 是一个逻辑概念，它只包含一些元数据信息，比如数据起始位置、数据长度、数据所在节点等。它的划分方法完全由用户自己决定。大多数情况下，split的大小最好和block的大小一样，这样能够省下数据传输所不必要的开销）</p>
+<h3 id="About-Shuffle（关于Shuffle）"><a href="#About-Shuffle（关于Shuffle）" class="headerlink" title="About Shuffle（关于Shuffle）"></a>About Shuffle（关于Shuffle）</h3><p><img src="/image/MapReduce-fifth.png" alt></p>
+<ul>
+<li><h4 id="Shuffle-on-Map（Map端的Shuffle）"><a href="#Shuffle-on-Map（Map端的Shuffle）" class="headerlink" title="Shuffle on Map（Map端的Shuffle）"></a>Shuffle on Map（Map端的Shuffle）</h4><ol>
+<li><p>Each Map task is assigned a cache (default 100MB cache).</p>
+<p>（每个Map任务分配一个缓存（默认100MB缓存 ））</p>
+</li>
+<li><p>Generally, when the cache exceeds 0.8, overwriting (writing the cached file to disk) occurs. While overwriting, the file is partitioned, sorted and merged by user selection (partition defaults to hash function, sorting is the default operation, and merging adds value values of the same key).</p>
+<p>（一般当超过缓存的0.8时，就会发生溢写（将缓存文件写入磁盘当中），在溢写的同时会对文件进行分区、排序和用户选择的合并操作（分区默认采用哈希函数，排序是默认的操作，合并是将相同key的value值相加） ）</p>
+</li>
+<li><p>Merge before the end of the Map task and get a large file on the local disk.</p>
+<p>（在Map任务全部结束之前进行归并 ，归并得到一个大的文件，放在本地磁盘）</p>
+</li>
+<li><p>When merging files, if the number of overwritten files is larger than the predetermined value (default is 3), merge can be started again, and no merge can be started if the number is less than 3 (merge operation requires user definition, and merge operation will not be performed if the user is not defined).</p>
+<p>（文件归并时，如果溢写文件数量大于预定值（默认是3）则可以再次启动合并，少于3则不会启动（合并操作需要用户定义，如果用户没有定义，则不会执行合并操作） ）</p>
+</li>
+<li><p>JobTracker always monitors the execution of Map tasks and notifies Reduce tasks to collect data.</p>
+<p>（文件归并时，如果溢写文件数量大于预定值（默认是3）则可以再次启动合并，少于3则不会启动（合并操作需要用户定义，如果用户没有定义，则不会执行合并操作） ）</p>
+</li>
+</ol>
+</li>
+<li><h4 id="Shuffle-on-Reduce（Reduce端的Shuffle）"><a href="#Shuffle-on-Reduce（Reduce端的Shuffle）" class="headerlink" title="Shuffle on Reduce（Reduce端的Shuffle）"></a>Shuffle on Reduce（Reduce端的Shuffle）</h4><ol>
+<li><p>The Reduce task asks JobTracker if the Map task has been completed, and if so, gets the task.</p>
+<p>（Reduce任务通过向JobTracker询问Map任务是否完成，若完成，则领取任务）</p>
+</li>
+<li><p>After the Reduce task receives the task, it first writes the data to the cache, merges the data from different machines, and then merges them, and finally writes them to disk (when the data is small, the cache can be loaded, the data is exported directly to Reduce)</p>
+<p>（Reduce任务领取任务之后，先将数据写入缓存，对于来自不同机器上面的数据进行先归并，再合并，最后写入磁盘（当数据很少，缓存就装得下时，直接将数据输出给Reduce））</p>
+</li>
+</ol>
+</li>
+</ul>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
