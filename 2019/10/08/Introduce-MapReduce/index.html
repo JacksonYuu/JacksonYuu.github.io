@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Introduce MapReduce&lt;br&gt;（MapReduce的介绍） - JacksonYuu - Personal Blog</title>
+    <title>Intro MapReduce&lt;br&gt;（介绍MapReduce） - JacksonYuu - Personal Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="What is MapReduce?（什么是MapReduce？）"> 
+    <meta name="description" content="What is MapReduce?（什么是MapReduce？）
+MapReduce is a distributed parallel programming model for paralle,"> 
     <meta name="author" content="JacksonYuu"> 
     <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -35,7 +36,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;" data-url="https://JacksonYuu.github.io"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">Introduce MapReduce<br>（MapReduce的介绍）</h3>
+    <h3 class="subtitle">Intro MapReduce<br>（介绍MapReduce）</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -53,7 +54,7 @@
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">Introduce MapReduce<br>（MapReduce的介绍）</h1>
+        <h1 class="title">Intro MapReduce<br>（介绍MapReduce）</h1>
         <div class="stuff">
             <span>十月 08, 2019</span>
             
@@ -62,7 +63,56 @@
 
         </div>
         <div class="content markdown">
-            <h3 id="What-is-MapReduce-（什么是MapReduce？）"><a href="#What-is-MapReduce-（什么是MapReduce？）" class="headerlink" title="What is MapReduce?（什么是MapReduce？）"></a>What is MapReduce?（什么是MapReduce？）</h3>
+            <h3 id="What-is-MapReduce-（什么是MapReduce？）"><a href="#What-is-MapReduce-（什么是MapReduce？）" class="headerlink" title="What is MapReduce?（什么是MapReduce？）"></a>What is MapReduce?（什么是MapReduce？）</h3><ul>
+<li><p>MapReduce is a distributed parallel programming model for parallel computing of large data sets (larger than 1TB)</p>
+<p>（MapReduce是一种分布式并行编程模型，用于大规模数据集（大于1TB）的并行运算）</p>
+</li>
+<li><p>MapReduce highly abstracts the complicated parallel computing process running on large-scale cluster into two functions: Map and Reduce, which makes programming easy, and does not need to master the details of distributed parallel programming. It is also easy to run its own programs on distributed systems to complete the calculation of massive data.</p>
+<p>（MapReduce将复杂的、运行于大规模集群上的并行计算过程高度地抽象到了两个函数：Map和Reduce，这样就使得编程容易，不需要掌握分布式并行编程细节，也可以很容易把自己的程序运行在分布式系统上，完成海量数据的计算）</p>
+</li>
+<li><p>MapReduce uses a “divide and conquer” strategy. A large-scale data set stored in a distributed file system is divided into many separate fragments, which can be processed in parallel by multiple Map tasks.</p>
+<p>（MapReduce采用“分而治之”策略，一个存储在分布式文件系统中的大规模数据集，会被切分成许多独立的分片（split），这些分片可以被多个Map任务并行处理）</p>
+</li>
+<li><p>One of the ideas of MapReduce design is that “computing is closer to data” rather than “data is closer to computing”, because mobile data requires a lot of network transmission overhead.”Computing to Data Close” is the node where the task is assigned to the data, and “Data to Computing Close” is the node where the data is transmitted from other nodes to the running task.</p>
+<p>（MapReduce设计的一个理念就是“计算向数据靠拢”，而不是“数据向计算靠拢”，因为，移动数据需要大量的网络传输开销。“计算向数据靠拢”是任务被分配到数据所在的节点上，“数据向计算靠拢”是数据从其他节点传输到运行任务的节点上）</p>
+</li>
+<li><p>MapReduce framework uses Master/Slave architecture, including one Master and several Slaves. Hadoop version 1.0 is JobTracker running on Master, TaskTracker running on Slave, and Resource Coordinator YARN added to Hadoop version 2.0, ResourceManager running on Master and NodeManager running on Slave.</p>
+<p>（MapReduce框架采用了Master/Slave架构，包括一个Master和若干个Slave。Hadoop1.0的版本是Master上运行JobTracker，Slave上运行TaskTracker，Hadoop2.0版本添加了YARN这个资源协调者之后，Master上运行ResourceManager，Slave上运行NodeManager）</p>
+</li>
+</ul>
+<h3 id="Advantages-of-MapReduce（MapReduce的优势）"><a href="#Advantages-of-MapReduce（MapReduce的优势）" class="headerlink" title="Advantages of MapReduce（MapReduce的优势）"></a>Advantages of MapReduce（MapReduce的优势）</h3><p><img src="/image/MapReduce-first.png" alt></p>
+<h3 id="Map-and-Reduce（Map和Reduce）"><a href="#Map-and-Reduce（Map和Reduce）" class="headerlink" title="Map and Reduce（Map和Reduce）"></a>Map and Reduce（Map和Reduce）</h3><p><img src="/image/MapReduce-second.png" alt></p>
+<h3 id="Components-of-MapReduce（MapReduce的组成）"><a href="#Components-of-MapReduce（MapReduce的组成）" class="headerlink" title="Components of MapReduce（MapReduce的组成）"></a>Components of MapReduce（MapReduce的组成）</h3><ul>
+<li><p>Client</p>
+<p> MapReduce programs written by users are submitted to JobTracker through Client, and the running status of jobs can be viewed through some interfaces provided by Client.</p>
+<p> （用户编写的MapReduce程序通过Client提交到JobTracker端，同时可通过Client提供的一些接口查看作业运行状态）</p>
+</li>
+<li><p>JobTracker（ResourceManager）</p>
+<ol>
+<li><p>Responsible for resource monitoring and job scheduling, while monitoring the health of all TaskTracker and Job, once the failure is found, the corresponding tasks will be transferred to other nodes.</p>
+<p>（负责资源监控和作业调度，同时监控所有TaskTracker与Job的健康状况，一旦发现失败，就将相应的任务转移到其他节点。）</p>
+</li>
+<li><p>Tracking the progress of task execution, resource usage and other information, and informing the task scheduler (Task Scheduler, in 2.0, YARN), and the scheduler will select the appropriate tasks to use these resources when resources are free.</p>
+<p>（跟踪任务的执行进度、资源使用量等信息，并将这些信息告诉任务调度器（TaskScheduler，在2.0中为YARN），而调度器会在资源出现空闲时，选择合适的任务去使用这些资源）</p>
+</li>
+</ol>
+</li>
+<li><p>TaskTracker（NodeManager）</p>
+<ol>
+<li><p>Periodically report the resource usage and task running progress to JobTracker through heartbeat. At the same time, receive the commands sent by JobTracker and perform the corresponding operations (such as starting new tasks, killing tasks, etc.).</p>
+<p> （周期性地通过“心跳”将本节点上资源的使用情况和任务的运行进度汇报给JobTracker，同时接收JobTracker 发送过来的命令并执行相应的操作（如启动新任务、杀死任务等））</p>
+</li>
+<li><p>The resource amount (CPU, memory, etc.) on this node is divided by “slot” equivalence. A Task gets a slot before it has a chance to run, and the function of the Hadoop scheduler is to allocate the free slots on each Task Tracker to Task. Slot is divided into Map slot and Reduce slot, which are used by MapTask and Reduce Task respectively.</p>
+<p>（使用“slot”等量划分本节点上的资源量（CPU、内存等）。一个Task 获取到一个slot 后才有机会运行，而Hadoop调度器的作用就是将各个TaskTracker上的空闲slot分配给Task使用。slot 分为Map slot 和Reduce slot 两种，分别供MapTask 和Reduce Task 使用）</p>
+</li>
+</ol>
+</li>
+<li><p>Task</p>
+<p> Task is divided into Map Task and Reduce Task, both started by TaskTracker.</p>
+<p> （Task 分为Map Task 和Reduce Task 两种，均由TaskTracker 启动）</p>
+</li>
+</ul>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
