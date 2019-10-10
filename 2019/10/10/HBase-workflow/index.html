@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HBase workflow&lt;br&gt;（HBase工作流程） - JacksonYuu - Personal Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="Components of HBase（HBase的组件）
+Library function（库函数）
+To link to each client（为了链接到各个客户端）
+
+A Master Se,"> 
+    <meta name="author" content="JacksonYuu"> 
+    <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">JacksonYuu - Personal Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://JacksonYuu.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">HBase workflow<br>（HBase工作流程）</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">HBase workflow<br>（HBase工作流程）</h1>
+        <div class="stuff">
+            <span>十月 10, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/HBase/">HBase</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/workflow/">workflow</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="Components-of-HBase（HBase的组件）"><a href="#Components-of-HBase（HBase的组件）" class="headerlink" title="Components of HBase（HBase的组件）"></a>Components of HBase（HBase的组件）</h3><ul>
+<li><p>Library function（库函数）</p>
+<p>To link to each client（为了链接到各个客户端）</p>
+</li>
+<li><p>A Master Server（一个作为Master的主服务器）</p>
+<p>Responsible for management and maintenance of partition information of HBase table, maintenance of region server list, allocation of region, load balancing.（负责管理和维护HBase表的分区信息，维护Region服务器列表，分配Region，负载均衡）</p>
+</li>
+<li><p>Several slave servers as Regions（若干个作为Region的从服务器）</p>
+<p>Responsible for storing and maintaining the region assigned to oneself, handling read and write requests from clients（负责存储和维护分配给自己的Region，处理来自客户端的读写请求）</p>
+</li>
+</ul>
+<h3 id="Table-And-Region（表和Region）"><a href="#Table-And-Region（表和Region）" class="headerlink" title="Table And Region（表和Region）"></a>Table And Region（表和Region）</h3><ul>
+<li><p>Each table in HBase has only one region at the beginning. When the region size exceeds the set size (the optimal size of each region depends on the effective processing capacity of a single server, and the current optimal size of each region is recommended to be 1GB-2GB), the region will split (the same region will not be split into multiple region servers, each region server stores 10-1000 regions).</p>
+<p>（HBase中每一张表一开始都只有一个Region，当Region的大小超过了设定大小（每个Region的最佳大小取决于单台服务器的有效处理能力，目前每个Region最佳大小建议1GB-2GB），Region就会进行分裂（同一个Region不会被分拆到多个Region服务器，每个Region服务器存储10-1000个Region））</p>
+</li>
+<li><p>HBase itself has two tables, metadata table (. META. table), which stores the mapping relationship between region and region server, and root table (- ROOT - table), which records the specific location of all metadata.</p>
+<p>（HBase本身就自带两张表，元数据表（.META.表）（存储了Region和Region服务器的映射关系）、根数据表（-ROOT-表）（记录所有元数据的具体位置））</p>
+</li>
+<li><p>Metadata tables can also be split, but the root table has only one region and the name of the program is written to death. The zookeeper file records the location of the root table (clients can access HBase database directly through zookeeper, which greatly reduces Master’s burden).</p>
+<p>（元数据表也会进行分裂，但是根数据表有且只有一个Region并且在程序中名字是被写死的，其中zookeeper文件记录了根数据表的位置（客户端直接能通过zookeeper访问HBase数据库，大大减少了Master的负担））</p>
+</li>
+</ul>
+<h3 id="Tertiary-Addressing（三级寻址）"><a href="#Tertiary-Addressing（三级寻址）" class="headerlink" title="Tertiary Addressing（三级寻址）"></a>Tertiary Addressing（三级寻址）</h3><p><img src="/image/HBase-second.png" alt></p>
+<ul>
+<li><p>To speed up access, all regions of the. Meta. Table are saved in memory</p>
+<p>（为了加快访问速度，.META.表的全部Region都会被保存在内存中 ）</p>
+</li>
+<li><p>Assuming that each row of the. META. table (a mapping entry) occupies about 1KB of memory and each region is limited to 128MB, the calculation method for the number of regions of user data tables that can be saved by the three-tier structure above is:</p>
+<p>（假设.META.表的每行（一个映射条目）在内存中大约占用1KB，并且每个Region限制为128MB，那么，上面的三层结构可以保存的用户数据表的Region数目的计算方法是： ）</p>
+<ol>
+<li><p>(-ROOT-Table addressable. META. Table Region number) * (Number of Regions per. META. Table Region addressable user data table)</p>
+<p>（（-ROOT-表能够寻址的.META.表的Region个数）×（每个.META.表的 Region可以寻址的用户数据表的Region个数） ）</p>
+</li>
+<li><p>A - ROOT - table can only have one region at most, that is, 128MB at most. According to the 1 KB memory occupied by each row (a mapping entry), 128MB space can accommodate 128MB/1 KB = 2 * 17 rows. That is to say, a - ROOT - table can address 2 * 17. META. tables.</p>
+<p>（一个-ROOT-表最多只能有一个Region，也就是最多只能有128MB，按照每行（一个映射条目）占用1KB内存计算，128MB空间可以容纳128MB/1KB=2 * 17 行，也就是说，一个-ROOT-表可以寻址2 * 17 个.META.表的Region。 ）</p>
+</li>
+<li><p>Similarly, the number of Regions in each. META. table’s Regions addressable user data table is 128MB/1KB = 2 * 17.</p>
+<p>（同理，每个.META.表的 Region可以寻址的用户数据表的Region个数是128MB/1KB=2 * 17 。 ）</p>
+</li>
+<li><p>Ultimately, the number of Regions that can be saved by the three-tier structure is (128MB/1KB) *  (128MB/1KB)= 2 * 34 Regions.</p>
+<p>（最终，三层结构可以保存的Region数目是(128MB/1KB) × (128MB/1KB) = 2 * 34 个Region ）</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="HBase-System-Architecture（HBase系统架构）"><a href="#HBase-System-Architecture（HBase系统架构）" class="headerlink" title="HBase System Architecture（HBase系统架构）"></a>HBase System Architecture（HBase系统架构）</h3><p><img src="/image/HBase-third.png" alt></p>
+<ol>
+<li><h4 id="Client（客户端）"><a href="#Client（客户端）" class="headerlink" title="Client（客户端）"></a>Client（客户端）</h4><p>The client includes an interface to access HBase and maintains the region location information that has been accessed in the cache to speed up the subsequent data access process.</p>
+<p>（客户端包含访问HBase的接口，同时在缓存中维护着已经访问过的Region位置信息，用来加快后续数据访问过程）</p>
+</li>
+<li><h4 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h4><p>Zookeeper can help elect a Master as the head of the cluster and ensure that there is always only one Master running at any time, thus avoiding the “single point failure” problem of Master. Zookeeper is a good cluster management tool, which is widely used in distributed computing, providing configuration maintenance, domain name services, distributed synchronization, group services and so on.、</p>
+<p>（Zookeeper可以帮助选举出一个Master作为集群的总管，并保证在任何时刻总有唯一一个Master在运行，这就避免了Master的“单点失效”问题。Zookeeper是一个很好的集群管理工具，被大量用于分布式计算，提供配置维护、域名服务、分布式同步、组服务等）</p>
+</li>
+<li><h4 id="Master"><a href="#Master" class="headerlink" title="Master"></a>Master</h4><ul>
+<li><p>Manage users to add, delete, modify and query tables.</p>
+<p>（管理用户对表的增加、删除、修改、查询等操作）</p>
+</li>
+<li><p>Implementing Load Balancing between Different Region Servers.</p>
+<p>（实现不同Region服务器之间的负载均衡）</p>
+</li>
+<li><p>Responsible for readjusting the distribution of Regions after the division or merger of Regions.</p>
+<p>（在Region分裂或合并后，负责重新调整Region的分布 ）</p>
+</li>
+<li><p>Migration of Regions on Failure-Failed Regions Server.</p>
+<p>（对发生故障失效的Region服务器上的Region进行迁移 ）</p>
+</li>
+</ul>
+</li>
+<li><p>Region</p>
+<p>Region server is the core module of HBase, which is responsible for maintaining the region allocated to itself and responding to user’s read and write requests.</p>
+<p>（Region服务器是HBase中最核心的模块，负责维护分配给自己的Region，并响应用户的读写请求）</p>
+</li>
+</ol>
+<h3 id="Region-Workflow（Region工作流程）"><a href="#Region-Workflow（Region工作流程）" class="headerlink" title="Region Workflow（Region工作流程）"></a>Region Workflow（Region工作流程）</h3><p><img src="/image/HBase-fifth.png" alt></p>
+<ol>
+<li><h4 id="User-Reading-and-Writing-Data-Procedure（用户读写数据过程）"><a href="#User-Reading-and-Writing-Data-Procedure（用户读写数据过程）" class="headerlink" title="User Reading and Writing Data Procedure（用户读写数据过程）"></a>User Reading and Writing Data Procedure（用户读写数据过程）</h4><ul>
+<li><p>When a user writes data, it is assigned to the corresponding Region server for execution.</p>
+<p>（用户写入数据时，被分配到相应Region服务器去执行 ）</p>
+</li>
+<li><p>User data is first written to MemStore and Hlog</p>
+<p>（用户数据首先被写入到MemStore和Hlog中 ）</p>
+</li>
+<li><p>The commit () call returns the operation to the client only after it has been written to the Hlog</p>
+<p>（只有当操作写入Hlog之后，commit()调用才会将其返回给客户端 ）</p>
+</li>
+<li><p>When the user reads the data, the Region server first accesses the MemStore cache, and if it cannot find it, it searches in the StoreFile on the disk.</p>
+<p>（当用户读取数据时，Region服务器会首先访问MemStore缓存，如果找不到，再去磁盘上面的StoreFile中寻找 ）</p>
+</li>
+</ul>
+</li>
+<li><h4 id="Cache-refresh（缓存的刷新）"><a href="#Cache-refresh（缓存的刷新）" class="headerlink" title="Cache refresh（缓存的刷新）"></a>Cache refresh（缓存的刷新）</h4><ul>
+<li><p>The system periodically writes the contents of the MemStore cache to the StoreFile file on disk, empties the cache, and writes a tag in the Hlog. Each brush generates a new StoreFile file. Therefore, each Store contains multiple StoreFile files.</p>
+<p>（系统会周期性地把MemStore缓存里的内容刷写到磁盘的StoreFile文件中，清空缓存，并在Hlog里面写入一个标记 ，每次刷写都生成一个新的StoreFile文件，因此，每个Store包含多个StoreFile文件 ）</p>
+</li>
+<li><p>Each Region server has its own HLog file, which is checked every time it starts to confirm whether a new write operation occurs after the last cache refresh operation; if an update is found, it is written to MemStore first, then to StoreFile, and finally deleted the old Hlog file to start serving users.</p>
+<p>（每个Region服务器都有一个自己的HLog 文件，每次启动都检查该文件，确认最近一次执行缓存刷新操作之后是否发生新的写入操作；如果发现更新，则先写入MemStore，再刷写到StoreFile，最后删除旧的Hlog文件，开始为用户提供服务）</p>
+</li>
+</ul>
+</li>
+<li><h4 id="Merger-of-StoreFile（StoreFile的合并）"><a href="#Merger-of-StoreFile（StoreFile的合并）" class="headerlink" title="Merger of StoreFile（StoreFile的合并）"></a>Merger of StoreFile（StoreFile的合并）</h4><p>Each brush generates a new StoreFile, too many of which affect the search speed, so when the number reaches a threshold, merge will start (call Store. compact () to merge multiple into one)</p>
+<p>（每次刷写都生成一个新的StoreFile，数量太多，影响查找速度，所以在数量达到了一个阈值就会启动合并（调用Store.compact()把多个合并成一个））</p>
+</li>
+</ol>
+<h3 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h3><ul>
+<li><p>Each region consists of one or more stores, at least one store. HBase will put the data accessed together in a store, which is to build a store for each Column Family (that is, there are several Column Families, there are also several Stores). A Store consists of a memStore (cache data) and 0 or more StoreFiles (disk data).</p>
+<p>（每一个region有一个或多个store组成，至少是一个store。HBase会把一起访问的数据放在一个store里面，即为每个ColumnFamily建一个store（即有几个ColumnFamily，也就有几个Store）。一个Store由一个memStore（缓存数据）和0或多个StoreFile（磁盘数据）组成）</p>
+</li>
+<li><p>Store is the core of the Region server. Multiple StoreFiles are merged into one. When a single StoreFile is too large, it triggers a split operation. A parent Region is split into two sub-regions.</p>
+<p>（Store是Region服务器的核心，多个StoreFile合并成一个 ，单个StoreFile过大时，又触发分裂操作，1个父Region被分裂成两个子Region）</p>
+</li>
+</ul>
+<h3 id="HLog"><a href="#HLog" class="headerlink" title="HLog"></a>HLog</h3><ul>
+<li><p>Distributed environments must consider system errors. HBase uses HLog to ensure system recovery</p>
+<p>（分布式环境必须要考虑系统出错。HBase采用HLog保证系统恢复 ）</p>
+</li>
+<li><p>The HBase system configures an HLog file for each Region server, which is a Write Ahead Log.</p>
+<p>（HBase系统为每个Region服务器配置了一个HLog文件，它是一种预写式日志（Write Ahead Log） ）</p>
+</li>
+<li><p>User updates must first be written to the log before writing to the MemStore cache, and until the corresponding log of the MemStore cache content has been written to disk, the cache content can not be written to disk.</p>
+<p>（用户更新数据必须首先写入日志后，才能写入MemStore缓存，并且直到MemStore缓存内容对应的日志已经写入磁盘，该缓存内容才能被刷写到磁盘）</p>
+</li>
+<li><p>Zookeeper monitors the status of each Region server in real time. When a Region server fails, Zookeeper notifies Master.</p>
+<p>（Zookeeper会实时监测每个Region服务器的状态，当某个Region服务器发生故障时，Zookeeper会通知Master ）</p>
+</li>
+<li><p>Master will first process the legacy Log file on the failed Region server, which contains log records from multiple Region objects.</p>
+<p>（Master首先会处理该故障Region服务器上面遗留的HLog文件，这个遗留的HLog文件中包含了来自多个Region对象的日志记录 ）</p>
+</li>
+<li><p>The system will split the HLog data according to the Region object to which each log belongs and place it in the directory of the corresponding Region object. Then, the invalid Region will be reassigned to the available Region server, and the HLog log records related to the Region object will be sent to the corresponding Region server.</p>
+<p>（系统会根据每条日志记录所属的Region对象对HLog数据进行拆分，分别放到相应Region对象的目录下，然后，再将失效的Region重新分配到可用Region服务器中，并把与该Region对象相关的HLog日志记录也发送给相应Region服务器 ）</p>
+</li>
+<li><p>When the Region server receives the Region object assigned to it and the related HLog log records, it will do all kinds of operations in the log records again, write the data in the log records into the MemStore cache, and then refresh it to the StoreFile file of the disk to complete the data recovery.</p>
+<p>（Region服务器领取到分配给自己的Region对象以及与之相关的HLog日志录以后，会重新做一遍日志记录中的各种操作，把日志记录中的数据写入到MemStore缓存中，然后，刷新到磁盘的StoreFile文件中，完成数据恢复 ）</p>
+</li>
+<li><p>Advantages of shared logs: improved write performance of tables; disadvantages: the need to split logs when restoring.</p>
+<p>（共用日志优点：提高对表的写操作性能；缺点：恢复时需要分拆日志）</p>
+</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r='JacksonYuu.github.io'
+        data-o='JacksonYuu'
+        data-a='JacksonYuu'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

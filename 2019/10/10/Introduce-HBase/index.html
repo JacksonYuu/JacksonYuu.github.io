@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Introduce HBase&lt;br&gt;（HBase的介绍） - JacksonYuu - Personal Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="What is HBase?（什么是HBase?）HBase is a highly reliable, high-performance, column-oriented and scalable,"> 
+    <meta name="author" content="JacksonYuu"> 
+    <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">JacksonYuu - Personal Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://JacksonYuu.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Introduce HBase<br>（HBase的介绍）</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Introduce HBase<br>（HBase的介绍）</h1>
+        <div class="stuff">
+            <span>十月 10, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/HBase/">HBase</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Introduce/">Introduce</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="What-is-HBase-（什么是HBase-）"><a href="#What-is-HBase-（什么是HBase-）" class="headerlink" title="What is HBase?（什么是HBase?）"></a>What is HBase?（什么是HBase?）</h3><p>HBase is a highly reliable, high-performance, column-oriented and scalable distributed database. It is an open source implementation of Google BigTable. It is mainly used to store unstructured and semi-structured loose data. The goal of HBase is to process very large tables, which can be scaled horizontally, using cheap computer clusters to process tables consisting of more than 1 billion rows of data and millions of columns of elements.</p>
+<p>（HBase是一个高可靠、高性能、面向列、可伸缩的分布式数据库，是谷歌BigTable的开源实现，主要用来存储非结构化和半结构化的松散数据。HBase的目标是处理非常庞大的表，可以通过水平扩展的方式，利用廉价计算机集群处理由超过10亿行数据和数百万列元素组成的数据表）</p>
+<h3 id="Advantages-of-HBase（HBase的优点）"><a href="#Advantages-of-HBase（HBase的优点）" class="headerlink" title="Advantages of HBase（HBase的优点）"></a>Advantages of HBase（HBase的优点）</h3><ol>
+<li><h4 id="Data-Type（数据类型）"><a href="#Data-Type（数据类型）" class="headerlink" title="Data Type（数据类型）"></a>Data Type（数据类型）</h4><p>Relational databases use relational models with rich data types and storage methods, while HBase uses a simpler data model, which stores data as unexplained strings.</p>
+<p>（关系数据库采用关系模型，具有丰富的数据类型和存储方式，HBase则采用了更加简单的数据模型，它把数据存储为未经解释的字符串）</p>
+</li>
+<li><h4 id="Data-Manipulation（数据操作）"><a href="#Data-Manipulation（数据操作）" class="headerlink" title="Data Manipulation（数据操作）"></a>Data Manipulation（数据操作）</h4><p>Relational databases contain rich operations, which involve complex multi-table joins. HBase operation does not have complex table-to-table relationship, only simple insertion, query, deletion, empty, etc., because HBase design avoids complex table-to-table relationship.</p>
+<p>（关系数据库中包含了丰富的操作，其中会涉及复杂的多表连接。HBase操作则不存在复杂的表与表之间的关系，只有简单的插入、查询、删除、清空等，因为HBase在设计上就避免了复杂的表和表之间的关系）</p>
+</li>
+<li><h4 id="Storage-Mode（存储模式）"><a href="#Storage-Mode（存储模式）" class="headerlink" title="Storage Mode（存储模式）"></a>Storage Mode（存储模式）</h4><p>Relational databases are stored in row mode. HBase is based on column storage. Each column family is saved by several files. The files of different column families are separated.</p>
+<p>(关系数据库是基于行模式存储的。HBase是基于列存储的，每个列族都由几个文件保存，不同列族的文件是分离的)</p>
+</li>
+<li><h4 id="Data-Index（数据索引）"><a href="#Data-Index（数据索引）" class="headerlink" title="Data Index（数据索引）"></a>Data Index（数据索引）</h4><p>Relational databases can usually build complex multiple indexes for different columns to improve data access performance. HBase has only one index - row keys. By clever design, all access methods in HBase are accessed either by row keys or by row keys scanning, so that the whole system does not slow down.</p>
+<p>（关系数据库通常可以针对不同列构建复杂的多个索引，以提高数据访问性能。HBase只有一个索引——行键，通过巧妙的设计，HBase中的所有访问方法，或者通过行键访问，或者通过行键扫描，从而使得整个系统不会慢下来）</p>
+</li>
+<li><h4 id="Data-Maintenance（数据维护）"><a href="#Data-Maintenance（数据维护）" class="headerlink" title="Data Maintenance（数据维护）"></a>Data Maintenance（数据维护）</h4><p>In a relational database, the update operation replaces the old value in the record with the latest current value, which does not exist after being overwritten. When updating is performed in HBase, the old version of data is not deleted, but a new version is generated, and the old version is still retained.</p>
+<p>（在关系数据库中，更新操作会用最新的当前值去替换记录中原来的旧值，旧值被覆盖后就不会存在。而在HBase中执行更新操作时，并不会删除数据旧的版本，而是生成一个新的版本，旧有的版本仍然保留）</p>
+</li>
+<li><h4 id="Scalability（可伸缩性）"><a href="#Scalability（可伸缩性）" class="headerlink" title="Scalability（可伸缩性）"></a>Scalability（可伸缩性）</h4><p>It is difficult for relational databases to expand horizontally, and the space for vertical expansion is limited. On the contrary, distributed databases such as HBase and BigTable are developed to achieve flexible horizontal scaling, which can easily scale performance by increasing or reducing the number of hardware in the cluster.</p>
+<p>（关系数据库很难实现横向扩展，纵向扩展的空间也比较有限。相反，HBase和BigTable这些分布式数据库就是为了实现灵活的水平扩展而开发的，能够轻易地通过在集群中增加或者减少硬件数量来实现性能的伸缩）</p>
+</li>
+</ol>
+<h3 id="HBase-Data-Model（HBase数据模型）"><a href="#HBase-Data-Model（HBase数据模型）" class="headerlink" title="HBase Data Model（HBase数据模型）"></a>HBase Data Model（HBase数据模型）</h3><ol>
+<li><p>HBase is a sparse, multi-dimensional, sorted mapping table whose indexes are row keys, column families, column qualifiers, and timestamps.</p>
+<p>（HBase是一个稀疏、多维度、排序的映射表，这张表的索引是行键、列族、列限定符和时间戳 ）</p>
+</li>
+<li><p>Each value is an unexplained string with no data type</p>
+<p>（每个值是一个未经解释的字符串，没有数据类型）</p>
+</li>
+<li><p>Users store data in tables, each row has a sortable row key and any number of lists in the horizontal direction consisting of one or more column families, a column family can contain any number of columns, and the data in the same column family can be stored together.</p>
+<p>（用户在表中存储数据，每一行都有一个可排序的行键和任意多的列表在水平方向由一个或者多个列族组成，一个列族中可以包含任意多个列，同一个列族里面的数据存储在一起 ）</p>
+</li>
+<li><p>Column family supports dynamic expansion. It is easy to add a column family or column without pre-defining the number and type of columns. All columns are stored in the form of strings. Users need to convert data type by themselves.</p>
+<p>（列族支持动态扩展，可以很轻松地添加一个列族或列，无需预先定义列的数量以及类型，所有列均以字符串形式存储，用户需要自行进行数据类型转换）</p>
+</li>
+<li><p>When updating is performed in HBase, the old version of data is not deleted, but a new version is generated, and the old version is still retained (this is related to the feature that HDFS only allows additional and no modification)</p>
+<p>（HBase中执行更新操作时，并不会删除数据旧的版本，而是生成一个新的版本，旧有的版本仍然保留（这是和HDFS只允许追加不允许修改的特性相关的））</p>
+</li>
+</ol>
+<p><img src="/image/HBase-first.png" alt></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r='JacksonYuu.github.io'
+        data-o='JacksonYuu'
+        data-a='JacksonYuu'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

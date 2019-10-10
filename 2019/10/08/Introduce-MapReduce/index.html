@@ -58,7 +58,7 @@ MapReduce is a distributed parallel programming model for paralle,">
         <div class="stuff">
             <span>十月 08, 2019</span>
             
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/MapReduce/">MapReduce</a></li></ul>
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Introduce/">Introduce</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/MapReduce/">MapReduce</a></li></ul>
 
 
         </div>
@@ -83,12 +83,10 @@ MapReduce is a distributed parallel programming model for paralle,">
 <h3 id="Advantages-of-MapReduce（MapReduce的优势）"><a href="#Advantages-of-MapReduce（MapReduce的优势）" class="headerlink" title="Advantages of MapReduce（MapReduce的优势）"></a>Advantages of MapReduce（MapReduce的优势）</h3><p><img src="/image/MapReduce-first.png" alt></p>
 <h3 id="Map-and-Reduce（Map和Reduce）"><a href="#Map-and-Reduce（Map和Reduce）" class="headerlink" title="Map and Reduce（Map和Reduce）"></a>Map and Reduce（Map和Reduce）</h3><p><img src="/image/MapReduce-second.png" alt></p>
 <h3 id="Components-of-MapReduce（MapReduce的组成）"><a href="#Components-of-MapReduce（MapReduce的组成）" class="headerlink" title="Components of MapReduce（MapReduce的组成）"></a>Components of MapReduce（MapReduce的组成）</h3><ul>
-<li><p>Client</p>
-<p> MapReduce programs written by users are submitted to JobTracker through Client, and the running status of jobs can be viewed through some interfaces provided by Client.</p>
+<li><h4 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h4><p> MapReduce programs written by users are submitted to JobTracker through Client, and the running status of jobs can be viewed through some interfaces provided by Client.</p>
 <p> （用户编写的MapReduce程序通过Client提交到JobTracker端，同时可通过Client提供的一些接口查看作业运行状态）</p>
 </li>
-<li><p>JobTracker（ResourceManager）</p>
-<ol>
+<li><h4 id="JobTracker（ResourceManager）"><a href="#JobTracker（ResourceManager）" class="headerlink" title="JobTracker（ResourceManager）"></a>JobTracker（ResourceManager）</h4><ol>
 <li><p>Responsible for resource monitoring and job scheduling, while monitoring the health of all TaskTracker and Job, once the failure is found, the corresponding tasks will be transferred to other nodes.</p>
 <p>（负责资源监控和作业调度，同时监控所有TaskTracker与Job的健康状况，一旦发现失败，就将相应的任务转移到其他节点。）</p>
 </li>
@@ -97,8 +95,7 @@ MapReduce is a distributed parallel programming model for paralle,">
 </li>
 </ol>
 </li>
-<li><p>TaskTracker（NodeManager）</p>
-<ol>
+<li><h4 id="TaskTracker（NodeManager）"><a href="#TaskTracker（NodeManager）" class="headerlink" title="TaskTracker（NodeManager）"></a>TaskTracker（NodeManager）</h4><ol>
 <li><p>Periodically report the resource usage and task running progress to JobTracker through heartbeat. At the same time, receive the commands sent by JobTracker and perform the corresponding operations (such as starting new tasks, killing tasks, etc.).</p>
 <p> （周期性地通过“心跳”将本节点上资源的使用情况和任务的运行进度汇报给JobTracker，同时接收JobTracker 发送过来的命令并执行相应的操作（如启动新任务、杀死任务等））</p>
 </li>
@@ -107,8 +104,7 @@ MapReduce is a distributed parallel programming model for paralle,">
 </li>
 </ol>
 </li>
-<li><p>Task</p>
-<p> Task is divided into Map Task and Reduce Task, both started by TaskTracker.</p>
+<li><h4 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h4><p> Task is divided into Map Task and Reduce Task, both started by TaskTracker.</p>
 <p> （Task 分为Map Task 和Reduce Task 两种，均由TaskTracker 启动）</p>
 </li>
 </ul>
