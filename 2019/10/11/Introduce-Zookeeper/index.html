@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Intro Zookeeper&lt;br&gt;（介绍Zookeeper） - JacksonYuu - Personal Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="What is zookeeper?（什么是Zookeeper？）ZooKeeper is a distributed, open source distributed application co,"> 
+    <meta name="author" content="JacksonYuu"> 
+    <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">JacksonYuu - Personal Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://JacksonYuu.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Intro Zookeeper<br>（介绍Zookeeper）</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Intro Zookeeper<br>（介绍Zookeeper）</h1>
+        <div class="stuff">
+            <span>十月 11, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Introduce/">Introduce</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Zookeeper/">Zookeeper</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="What-is-zookeeper-（什么是Zookeeper？）"><a href="#What-is-zookeeper-（什么是Zookeeper？）" class="headerlink" title="What is zookeeper?（什么是Zookeeper？）"></a>What is zookeeper?（什么是Zookeeper？）</h3><p>ZooKeeper is a distributed, open source distributed application coordination service, an open source implementation of Google’s Chubby, and an important component of Hadoop and Hbase. It is a software that provides consistency services for distributed applications. Its functions include configuration maintenance, domain name service, distributed synchronization, group service, etc.Simply put, it’s a small file storage system (storage system configuration information), which monitors the notification mechanism.</p>
+<p>（ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务，是Google的Chubby一个开源的实现，是Hadoop和Hbase的重要组件。它是一个为分布式应用提供一致性服务的软件，提供的功能包括：配置维护、域名服务、分布式同步、组服务等。简单来说就是小文件存储系统（存储系统配置信息），监听通知机制）</p>
+<h3 id="Small-File-Storage-System（小文件存储系统）"><a href="#Small-File-Storage-System（小文件存储系统）" class="headerlink" title="Small File Storage System（小文件存储系统）"></a>Small File Storage System（小文件存储系统）</h3><p><img src="/image/Zookeeper-first.png" alt></p>
+<p>In Zookeeper, all directory nodes are called Znode, which can be divided into two types:</p>
+<p>(在Zookeeper中所有的目录节点都叫做Znode，Znode又分为四种类型的节点：)</p>
+<ul>
+<li><h4 id="Persistent-Nodes（持久性节点）"><a href="#Persistent-Nodes（持久性节点）" class="headerlink" title="Persistent Nodes（持久性节点）"></a>Persistent Nodes（持久性节点）</h4><p>In Zookeeper, as long as you don’t actively delete it, it will always exist.And it has uniqueness.</p>
+<p>（在Zookeeper中只要不主动删除就会一直存在）</p>
+</li>
+<li><h4 id="Temporary-Nodes（临时性节点）"><a href="#Temporary-Nodes（临时性节点）" class="headerlink" title="Temporary Nodes（临时性节点）"></a>Temporary Nodes（临时性节点）</h4><p>When a service disconnects from Zookeeper or goes down, the Znode is deleted on its own initiative.</p>
+<p>（当有服务与Zookeeper断开连接或者是宕机的时候，会主动将此Znode删除）</p>
+</li>
+<li><h4 id="Ersistent-Ordered-Directory-Nodes（持久性有序目录节点）"><a href="#Ersistent-Ordered-Directory-Nodes（持久性有序目录节点）" class="headerlink" title="Ersistent Ordered Directory Nodes（持久性有序目录节点）"></a>Ersistent Ordered Directory Nodes（持久性有序目录节点）</h4><p>In Zookeeper, as long as you don’t actively delete it, it will always exist.And it has uniqueness.</p>
+<p>（在Zookeeper中只要不主动删除就会一直存在，并且具有唯一性）</p>
+</li>
+<li><h4 id="Temporary-Ordered-Directory-Nodes（临时性有序目录节点）"><a href="#Temporary-Ordered-Directory-Nodes（临时性有序目录节点）" class="headerlink" title="Temporary Ordered Directory Nodes（临时性有序目录节点）"></a>Temporary Ordered Directory Nodes（临时性有序目录节点）</h4><p>When a service disconnects from Zookeeper or goes down, the Znode is deleted on its own initiative.And it has uniqueness.</p>
+<p>（当有服务与Zookeeper断开连接或者是宕机的时候，会主动将此Znode删除，并且具有唯一性）</p>
+</li>
+</ul>
+<h3 id="Monitoring-Notification-Mechanism（监听通知机制）"><a href="#Monitoring-Notification-Mechanism（监听通知机制）" class="headerlink" title="Monitoring Notification Mechanism（监听通知机制）"></a>Monitoring Notification Mechanism（监听通知机制）</h3><p>Zookeeper listens for directory nodes it cares about, and notifies clients when directory nodes change (data changes, deletions, subdirectory nodes are added and deleted).</p>
+<p>（Zookeeper监听它关心的目录节点，当目录节点发生变化（数据改变、被删除、子目录节点增加删除）时，zookeeper会通知客户端。）</p>
+<h3 id="Electoral-Mechanism（选举机制）"><a href="#Electoral-Mechanism（选举机制）" class="headerlink" title="Electoral Mechanism（选举机制）"></a>Electoral Mechanism（选举机制）</h3><p>When Zookeeper’s main node (leader) goes down, a new leader is selected by the election mechanism inside Zookeeper (principle: a server initiates a polling request to the Zookeeper cluster, and more than half of the servers that get the most votes become leaders).</p>
+<p>（当Zookeeper的主节点（leader）发生宕机的时候，Zookeeper内部的选举机制就会选出一个新的leader（原理：由一台服务器向Zookeeper集群发起投票请求，得票最多并且超过半数以上的服务器成为leader））</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r='JacksonYuu.github.io'
+        data-o='JacksonYuu'
+        data-a='JacksonYuu'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
