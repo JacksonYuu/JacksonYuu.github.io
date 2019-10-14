@@ -10,8 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="What is Flume?（什么是Flume？）
-"> 
+    <meta name="description" content="What is Flume?（什么是Flume？）Flume is a log collection system provided by Cloudera. Flume supports cust,"> 
     <meta name="author" content="JacksonYuu"> 
     <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -63,7 +62,37 @@
 
         </div>
         <div class="content markdown">
-            <p>What is Flume?（什么是Flume？）</p>
+            <h3 id="What-is-Flume-（什么是Flume？）"><a href="#What-is-Flume-（什么是Flume？）" class="headerlink" title="What is Flume?（什么是Flume？）"></a>What is Flume?（什么是Flume？）</h3><p>Flume is a log collection system provided by Cloudera. Flume supports customizing various data senders in the log system to collect data. At the same time, Flume provides the ability to process data simply and write to various data recipients (customizable). Flume is a distributed, reliable and highly available system for collecting, aggregating and transferring massive logs.</p>
+<p>（Flume 是 Cloudera 提供的日志收集系统，Flume 支持在日志系统中定制各类数据发送方，用于收集数据；同时，Flume 提供对数据进行简单处理，并写到各种数据接受方（可定制）的能力。 Flume 是一个分布式、可靠和高可用的海量日志采集、聚合和传输的系统。）</p>
+<h3 id="Characteristics-of-Flume（Flume的特点）"><a href="#Characteristics-of-Flume（Flume的特点）" class="headerlink" title="Characteristics of Flume（Flume的特点）"></a>Characteristics of Flume（Flume的特点）</h3><ul>
+<li><h4 id="Reliability（可靠性）"><a href="#Reliability（可靠性）" class="headerlink" title="Reliability（可靠性）"></a>Reliability（可靠性）</h4><p>Flume offers three data reliability options, including End-to-end, Store on Failure and Best effort. End-to-end uses disk logs and Ack to ensure that the data Flume receives will eventually reach its destination. Store on failure keeps the data on the local hard disk when the destination is unavailable. Unlike End-to-end, Store on failure may lose some data if there is a process problem. Best effect does not guarantee any quality of service.</p>
+<p>（ Flume 提供 3 种数据可靠性选项，包括 End-to-end、Store on failure 和 Best effort。其中 End-to-end 使用了磁盘日志和接受端 Ack 的方式，保证 Flume 接受到的数据会最终到达目的。Store on failure 在目的不可用的时候，数据会保持在本地硬盘。和 End-to-end 不同的是，如果是进程出现问题，Store on failure 可能会丢失部分数据。Best effort 不做任何 QoS 保证。 ）</p>
+</li>
+<li><h4 id="Scalability（可扩展性）"><a href="#Scalability（可扩展性）" class="headerlink" title="Scalability（可扩展性）"></a>Scalability（可扩展性）</h4><p>Flume’s three major components: collector, master, and storage are scalable. It should be noted that Flume does not need state to handle events, and its Scalability can be easily implemented.</p>
+<p>（ Flume 的 3 大组件：collector、master 和 storage都是可伸缩的。需要注意的是，Flume 中对事件的处理不需要带状态，它的 Scalability 可以很容易实现。 ）</p>
+</li>
+<li><h4 id="Manageability（可管理性）"><a href="#Manageability（可管理性）" class="headerlink" title="Manageability（可管理性）"></a>Manageability（可管理性）</h4><p>Flume uses ZooKeeper and gossip to ensure consistency and high availability of configuration data. At the same time, multi-Master ensures that Master can manage a large number of nodes.</p>
+<p>（ Flume 利用 ZooKeeper 和 gossip，保证配置数据的一致性、高可用。同时，多 Master，保证 Master 可以管理大量的节点。 ）</p>
+</li>
+<li><h4 id="Extensibility（可延展性）"><a href="#Extensibility（可延展性）" class="headerlink" title="Extensibility（可延展性）"></a>Extensibility（可延展性）</h4><p>Based on Java, users can add various new functions to Flume. For example, by inheriting Source, users can realize their own data access methods and realize the subclasses of Sink. Users can write data to specific targets. At the same time, through Sink Decorator, users can pre-process data to a certain extent.</p>
+<p>（ 基于 Java，用户可以为 Flume 添加各种新的功能，如通过继承 Source，用户可以实现自己的数据接入方式，实现 Sink 的子类，用户可以将数据写往特定目标，同时，通过 SinkDecorator，用户可以对数据进行一定的预处理。 ）</p>
+</li>
+</ul>
+<h3 id="Architecture-of-Flume（Flume的架构）"><a href="#Architecture-of-Flume（Flume的架构）" class="headerlink" title="Architecture of Flume（Flume的架构）"></a>Architecture of Flume（Flume的架构）</h3><p>The magic of flume comes from its own design, which is agent, agent itself is a Java process, running in the log collection node - the so-called log collection node is the server node. Agent contains three core components: source - &gt; Channel - &gt; sink, similar to the structure of producer, warehouse and consumer.</p>
+<p>（flume之所以这么神奇，是源于它自身的一个设计，这个设计就是agent，agent本身是一个java进程，运行在日志收集节点—所谓日志收集节点就是服务器节点。 agent里面包含3个核心的组件：source—-&gt;channel—–&gt;sink,类似生产者、仓库、消费者的架构。）</p>
+<ul>
+<li><h4 id="source"><a href="#source" class="headerlink" title="source"></a>source</h4><p>Source component is designed to collect data, and can process log data of various types and formats, including avro, thrift, exec, jms, spooling directory, netcat, sequence generator, syslog, http, legacy, custom data, etc.</p>
+<p>（source组件是专门用来收集数据的，可以处理各种类型、各种格式的日志数据，包括avro、thrift、exec、jms、spooling directory、netcat、sequence generator、syslog、http、legacy、自定义数据等。）</p>
+</li>
+<li><h4 id="channel"><a href="#channel" class="headerlink" title="channel"></a>channel</h4><p>After the source component collects the data, it is temporarily stored in the channel, that is, the channel component is used to store the temporary data in the agent - simply caching the collected data, which can be stored in memory, jdbc, file and so on.</p>
+<p>（source组件把数据收集以后，临时存放在channel中，即channel组件在agent中是专门用来存放临时数据的——对采集到的数据进行简单的缓存，可以存放在memory、jdbc、file等。）</p>
+</li>
+<li><h4 id="sink"><a href="#sink" class="headerlink" title="sink"></a>sink</h4><p>Sink component is used to send data to large destinations, including hdfs, logger, avro, thrift, ipc, file, null, hbse, solr, custom.</p>
+<p>（ sink组件是用于把数据发送大目的地 的组件，目的地包括hdfs、logger、avro、thrift、ipc、file、null、hbse、solr、自定义。 ）</p>
+</li>
+</ul>
+<h3 id="Operating-mechanism-of-Flume（Flume的运行机制）"><a href="#Operating-mechanism-of-Flume（Flume的运行机制）" class="headerlink" title="Operating mechanism of Flume（Flume的运行机制）"></a>Operating mechanism of Flume（Flume的运行机制）</h3><p>The core of flume is agent. This agent has two places to interact with the outside world. One is the input source of receiving data, the other is the data sink, which is responsible for sending data to the designated destination. After the source receives the data, it sends the data to the channel, which is temporarily stored as a data buffer, and then sink sends the data from the channel to a designated place, such as hdfs. <strong>Note: Channel will delete temporary data only after sink sends the data in channel successfully. This mechanism guarantees the reliability and security of data transmission.</strong></p>
+<p>（flume的核心就是agent，这个agent对外有两个进行交互的地方，一个是接收数据的输入source，一个是数据的发送sink，sink负责将数据发送到外部指定的目的地。source接收到数据之后，将数据发送给channel，channel作为一个数据缓冲区会临时存放这些数据，随后sink会将channel中的数据发送到指定的地方——例如hdfs等。<strong>注意：只有在sink将channel中的数据发送成功后，channel才会将临时的数据进行删除，这种机制保证了数据传输的可靠性与安全性。</strong>）</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">

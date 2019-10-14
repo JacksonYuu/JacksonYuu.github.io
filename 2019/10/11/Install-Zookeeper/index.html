@@ -75,8 +75,10 @@
 
 <p>Create a myid file under the dataDir folder and write the ID (the content can only be between 1 and 255 digits)</p>
 <p>（在dataDir文件夹下面创建一个myid文件并写入id（内容只能为1 - 255之间的数字））</p>
-<h3 id="3、third（第三步）"><a href="#3、third（第三步）" class="headerlink" title="3、third（第三步）"></a>3、third（第三步）</h3><p>Send the modified HBase file to the slave node using the SCP command.</p>
-<p>（使用scp命令将修改好的hbase文件发送给从节点）</p>
+<h3 id="3、third（第三步）"><a href="#3、third（第三步）" class="headerlink" title="3、third（第三步）"></a>3、third（第三步）</h3><p>Send the modified zookeeper file to the slave node using the SCP command.</p>
+<p>（使用scp命令将修改好的Zookeeper文件发送给从节点）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /usr/local/hadoop/zookeeper-3.4.14 root@slave1:/usr/local/hadoop</span><br></pre></td></tr></table></figure>
+
 <p>Configuration of environmental variables（配置好环境变量）</p>
 <p>Add to /etc/profile:（向/etc/profile中添加：）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export ZOOKEEPER_HOME=/usr/local/hadoop/zookeeper-3.4.14</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$ZOOKEEPER_HOME/bin</span><br></pre></td></tr></table></figure>

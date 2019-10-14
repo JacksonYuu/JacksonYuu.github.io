@@ -81,6 +81,8 @@
 
 <h3 id="3、third（第三步）"><a href="#3、third（第三步）" class="headerlink" title="3、third（第三步）"></a>3、third（第三步）</h3><p>Send the modified HBase file to the slave node using the SCP command.</p>
 <p>（使用scp命令将修改好的hbase文件发送给从节点）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /usr/local/hadoop/hbase-2.1.6 root@slave1:/usr/local/hadoop</span><br></pre></td></tr></table></figure>
+
 <p>Configuration of environmental variables（配置好环境变量）</p>
 <p>Add to / etc / profile:（向/etc/profile中添加：）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export HBASE_HOME=/usr/local/hadoop/hbase-2.1.6</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$HBASE_HOME/bin</span><br></pre></td></tr></table></figure>
