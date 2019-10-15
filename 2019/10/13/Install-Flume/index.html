@@ -82,9 +82,19 @@
 
 <p>Change the name file flume-conf.properties.template to flume-conf.properties under / usr/local/hadoop/apache-flume-1.8.0-bin/conf and add the contents of the file:</p>
 <p>（在/usr/local/hadoop/apache-flume-1.8.0-bin/conf下 将名称文件flume-conf.properties.template 改为 flume-conf.properties 并增加文件内容：）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">agent.sources.seqGenSrc.type = avro</span><br><span class="line"></span><br><span class="line">agent.sources.seqGenSrc.channels = memoryChannel</span><br><span class="line"></span><br><span class="line">agent.sources.seqGenSrc.bind = 0.0.0.0</span><br><span class="line"></span><br><span class="line">agent.sources.seqGenSrc.port = 44444</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">agent.sources.seqGenSrc.type = avro</span><br><span class="line"></span><br><span class="line">agent.sources.seqGenSrc.channels = memoryChannel</span><br><span class="line"></span><br><span class="line">agent.sources.seqGenSrc.bind = localhost</span><br><span class="line"></span><br><span class="line">agent.sources.seqGenSrc.port = 44444</span><br></pre></td></tr></table></figure>
 
-<p>4、fourth（第四步）</p>
+<h3 id="4、fourth（第四步）"><a href="#4、fourth（第四步）" class="headerlink" title="4、fourth（第四步）"></a>4、fourth（第四步）</h3><p>Deployment verifies that the installation was successful.（部署验证安装是否成功）</p>
+<p>Two terminals need to be connected. One terminal opens Flume for data collection and the other for data input.</p>
+<p>（需要连接两个终端，一个终端打开Flume进行数据收集，一个终端进行数据输入。）</p>
+<p><strong>First terminal（第一个终端）：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hadoop/apache-flume-1.8.0-bin</span><br><span class="line"></span><br><span class="line">bin/flume-ng agent \</span><br><span class="line">	-c conf \</span><br><span class="line">	-f conf/flume-conf.properties \</span><br><span class="line">	-n agent \</span><br><span class="line">	-Dflume.root.logger=INFO,console</span><br></pre></td></tr></table></figure>
+
+<p><strong>The other terminal（另一个终端）：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">touch logger</span><br><span class="line"></span><br><span class="line">echo &quot;Hello World&quot; &gt; logger</span><br><span class="line"></span><br><span class="line">cd /usr/local/hadoop/apache-flume-1.8.0-bin</span><br><span class="line"></span><br><span class="line">bin/flume-ng avro-client -H localhost -p 44444 -F logger</span><br></pre></td></tr></table></figure>
+
+<p>If you see HelloWorld at the first terminal, you successfully install Flume.</p>
+<p>（如果在第一个终端看到了Hello World，那么成功安装了Flume）</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
