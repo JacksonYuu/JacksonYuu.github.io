@@ -95,6 +95,79 @@
 
 <p>If you see HelloWorld at the first terminal, you successfully install Flume.</p>
 <p>（如果在第一个终端看到了Hello World，那么成功安装了Flume）</p>
+<h3 id="Configuration-Details（配置详解）"><a href="#Configuration-Details（配置详解）" class="headerlink" title="Configuration Details（配置详解）"></a>Configuration Details（配置详解）</h3><table>
+<thead>
+<tr>
+<th align="left">name（配置项名称）</th>
+<th align="left">effect（作用）</th>
+<th align="left">example（举例）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">agent</td>
+<td align="left">flume节点名称</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">agent.sources</td>
+<td align="left">收集数据并发送给channel</td>
+<td align="left">agent.sources=r1 r2</td>
+</tr>
+<tr>
+<td align="left">agent.channels</td>
+<td align="left">临时存放收集的数据</td>
+<td align="left">agent.channels=c1 c2</td>
+</tr>
+<tr>
+<td align="left">agent.sinks</td>
+<td align="left">从channel中读取数据并发送给目标</td>
+<td align="left">agent.sink=s1 s2</td>
+</tr>
+<tr>
+<td align="left">agent.sources.r1.type</td>
+<td align="left">设置source名称的源类型</td>
+<td align="left">agent.sources.r1.type=avro agent.sources.r2.type=sqooldir</td>
+</tr>
+<tr>
+<td align="left">agent.sources.r1.channels</td>
+<td align="left">设置临时存放的channel</td>
+<td align="left">agent.sources.r1.channels=c1 agent.sources.r2.channels=c2</td>
+</tr>
+<tr>
+<td align="left">agent.channels.c1.type</td>
+<td align="left">设置channel名称的类型</td>
+<td align="left">agent.channels.c1.type=memory</td>
+</tr>
+<tr>
+<td align="left">agent.sinks.s1.type</td>
+<td align="left">设置sink名称的类型</td>
+<td align="left">agent.sinks.s1.type=logger</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">configuration（参数）</th>
+<th align="left">effect（作用）</th>
+<th align="left">example（举例）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">–conf 或 -c</td>
+<td align="left">指定配置文件的文件夹名称</td>
+<td align="left">-c conf</td>
+</tr>
+<tr>
+<td align="left">–conf-file 或 -f</td>
+<td align="left">指定配置文件的地址</td>
+<td align="left">-f conf/flume-conf.properties</td>
+</tr>
+<tr>
+<td align="left">–name 或 -n</td>
+<td align="left">指定启动的flume节点名称</td>
+<td align="left">-n agent</td>
+</tr>
+</tbody></table>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
