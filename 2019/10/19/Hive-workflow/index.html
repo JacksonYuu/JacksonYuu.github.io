@@ -10,7 +10,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    
+    <meta name="description" content="Hive workflow（Hive工作流程）
+Client submits HQL statement.（客户端提交HQL语句）
+
+Compiler converts HQL statements,"> 
     <meta name="author" content="JacksonYuu"> 
     <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -62,7 +65,28 @@
 
         </div>
         <div class="content markdown">
-            
+            <h3 id="Hive-workflow（Hive工作流程）"><a href="#Hive-workflow（Hive工作流程）" class="headerlink" title="Hive workflow（Hive工作流程）"></a>Hive workflow（Hive工作流程）</h3><ol>
+<li><p>Client submits HQL statement.（客户端提交HQL语句）</p>
+</li>
+<li><p>Compiler converts HQL statements into operators one by one.</p>
+<p>（compiler（编译器）将HQL语句转化为一个个的操作符）</p>
+</li>
+<li><p>The operator is the minimum processing unit of hive database.</p>
+<p>（操作符为Hive数据库的最小处理单元）</p>
+</li>
+<li><p>Operators can be divided into HDFS operations and MapReduce jobs.</p>
+<p>（操作符可分为对HDFS的操作和MapReduce作业）</p>
+</li>
+</ol>
+<h3 id="Basic-principles-of-HQL（HQL的基本原理）"><a href="#Basic-principles-of-HQL（HQL的基本原理）" class="headerlink" title="Basic principles of HQL（HQL的基本原理）"></a>Basic principles of HQL（HQL的基本原理）</h3><ul>
+<li><h4 id="join"><a href="#join" class="headerlink" title="join"></a>join</h4><p><img src="/image/hive-third.png" alt></p>
+</li>
+<li><h4 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h4><p>Example：select rank, level ,count(*) as value from score group by rank, level</p>
+<p><img src="/image/hive-fourth.png" alt></p>
+</li>
+</ul>
+<h3 id="Transformation-process-of-HQL（HQL的转化过程）"><a href="#Transformation-process-of-HQL（HQL的转化过程）" class="headerlink" title="Transformation process of HQL（HQL的转化过程）"></a>Transformation process of HQL（HQL的转化过程）</h3><p><img src="/image/hive-fifth.png" alt></p>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
