@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Introduce Hadoop HA&lt;br&gt;（介绍Hadoop的HA） - JacksonYuu - Personal Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="What is the HA?（什么是高可用机制？）Ha (high availability), a high availability cluster, is an effective solu,"> 
+    <meta name="author" content="JacksonYuu"> 
+    <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">JacksonYuu - Personal Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://JacksonYuu.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Introduce Hadoop HA<br>（介绍Hadoop的HA）</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Introduce Hadoop HA<br>（介绍Hadoop的HA）</h1>
+        <div class="stuff">
+            <span>十月 31, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/HA/">HA</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Hadoop/">Hadoop</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Introduce/">Introduce</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="What-is-the-HA-（什么是高可用机制？）"><a href="#What-is-the-HA-（什么是高可用机制？）" class="headerlink" title="What is the HA?（什么是高可用机制？）"></a>What is the HA?（什么是高可用机制？）</h3><p>Ha (high availability), a high availability cluster, is an effective solution to ensure business continuity. Generally, ha has two or more nodes, which are divided into active nodes and standby nodes. Generally speaking, the one that is executing business is called the active node, and the one that is a backup of the active node is called the standby node. When there is a problem with the active node that causes the running business (task) to fail to run normally, the standby node will detect it and immediately connect the active node to execute the business. So as to realize the non interruption or short interruption of business.</p>
+<p>（HA(High Available)，高可用性集群，是保证业务连续性的有效解决方案，一般有两个或两个以上的节点，且分为活动节点及备用节点。通常把正在执行业务的称为活动节点，而作为活动节点的一个备份的则称为备用节点。当活动节点出现问题，导致正在运行的业务（任务）不能正常运行时，备用节点此时就会侦测到，并立即接续活动节点来执行业务。从而实现业务的不中断或短暂中断）</p>
+<p>In short, high availability means that the service can not be interrupted in 7 * 24 hours, so the biggest problem is to solve the single point of failure problem, so the standby node appears. When the active node works, the standby node is waiting to hit. Once the active node goes down, the standby node can immediately replace the active node to work.</p>
+<p>（简单的来说，高可用就是能够实现在7*24小时不中断服务，这样最大的问题就是要解决单点故障问题，由此备用节点就出现了，在活动节点工作时，备用节点待命中，一旦活动节点出现宕机，备用节点可以立即代替活动节点进行工作）</p>
+<h3 id="HA-of-Hadoop2-x（Hadoop2-x的高可用）"><a href="#HA-of-Hadoop2-x（Hadoop2-x的高可用）" class="headerlink" title="HA of Hadoop2.x（Hadoop2.x的高可用）"></a>HA of Hadoop2.x（Hadoop2.x的高可用）</h3><p><img src="/image/Hadoop-HA-first.png" alt></p>
+<h4 id="1、first（第一步）"><a href="#1、first（第一步）" class="headerlink" title="1、first（第一步）"></a>1、first（第一步）</h4><p>The implementation of two namonodes together is called a federation. One of the namenodes is active and the other is standby. The metadata information is stored in the memory of each node, and the edit log of metadata update is shared, and it is not in two nodes. The active node can read and write the edit, while the backup node can only read the edit.</p>
+<p>（实现两个NamoNode在一起的称为一个Federation。其中NameNode一个状态为active，一个状态为standby。各自的内存中都存有元数据信息，而对于元数据更新的edits日志是共享的，并且是不在两个节点的，活跃节点能够读取并写入edits，而备份节点只能进行读edits。）</p>
+<h3 id="2、second（第二步）"><a href="#2、second（第二步）" class="headerlink" title="2、second（第二步）"></a>2、second（第二步）</h3><p>There is a qjournal distributed application for editing to manage reading and writing. Qjournal is based on zookeeper, so zookeeper cluster needs to be built in the editing cluster.</p>
+<p>（对于edits有着一个qjournal分布式应用来管理读写，qjournal是基于zookeeper来实现的，所以在edits集群中需要搭建zookeeper集群）</p>
+<h4 id="3、third（第三步）"><a href="#3、third（第三步）" class="headerlink" title="3、third（第三步）"></a>3、third（第三步）</h4><p>A state monitoring process zkfc (registered on the zookeeper cluster of the edits) runs on each node of the namenode. When the active node goes down, zkfc will send the information to the zookeeper cluster. Similarly, the zkfc of the backup node will change its own state to active after receiving the information.</p>
+<p>（在每一个NameNode的节点上都运行着一个状态监控进程zkfc（注册在edits的zookeeper集群上），当活跃节点宕机的时候，zkfc会将信息发送给zookeeper集群，同样备份节点的zkfc接收到了信息之后就会将自身状态改为active。）</p>
+<h4 id="4、fourth（第四步）"><a href="#4、fourth（第四步）" class="headerlink" title="4、fourth（第四步）"></a>4、fourth（第四步）</h4><p>But in the process of zkfc monitoring, the active node may be suspended. After the suspended node, there will be two namenode processes, which will lead to brain split. In order to prevent this phenomenon, the backup node will forcibly kill the active node before changing the state.The first uses SSH kill - 9 namenode, and the second calls user-defined scripts</p>
+<p>（但是在zkfc进行监控的时候，可能活跃节点进行了假死，在假死之后就会存在两个NameNode进程，就会出现脑裂（brain split）现象。为了防止此现象出现，所以备份节点在改变状态之前会进行强制将活跃节点杀死。第一种使用ssh kill -9 namenode，第二种调用用户自定义的脚本程序）</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r='JacksonYuu.github.io'
+        data-o='JacksonYuu'
+        data-a='JacksonYuu'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
