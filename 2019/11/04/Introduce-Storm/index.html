@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Introduce Storm&lt;br&gt;（介绍Storm） - JacksonYuu - Personal Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="What is Storm？（什么是Storm？）Storm is a distributed real-time big data processing framework, known as t,"> 
+    <meta name="author" content="JacksonYuu"> 
+    <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">JacksonYuu - Personal Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://JacksonYuu.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Introduce Storm<br>（介绍Storm）</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Introduce Storm<br>（介绍Storm）</h1>
+        <div class="stuff">
+            <span>十一月 04, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Introduce/">Introduce</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Storm/">Storm</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="What-is-Storm？（什么是Storm？）"><a href="#What-is-Storm？（什么是Storm？）" class="headerlink" title="What is Storm？（什么是Storm？）"></a>What is Storm？（什么是Storm？）</h3><p>Storm is a distributed real-time big data processing framework, known as the real-time version of Hadoop in the industry. As more and more scenarios cannot tolerate high latency of Hadoop MapReduce, such as website statistics, recommendation system, early warning system, financial system (high-frequency trading, stock), etc. Therefore, the application of real-time processing (stream computing) for big data is becoming more and more extensive, and storm is occupying the absolute mainstream in real-time processing of big data.</p>
+<p>（Storm是分布式实时大数据处理框架，被业界称为实时版Hadoop。随着越来越多的场景对Hadoop的MapReduce高延迟无法容忍，比如网站统计、推荐系统、预警系统、金融系统(高频交易、股票)等等。所以对于大数据实时处理（流计算）的应用日趋广泛，而Storm更是在实时处理大数据中占领着绝对的主流。）</p>
+<h3 id="Storm-components（Storm的组件）"><a href="#Storm-components（Storm的组件）" class="headerlink" title="Storm components（Storm的组件）"></a>Storm components（Storm的组件）</h3><p><img src="/image/Storm-first.png" alt></p>
+<p><img src="/image/Storm-second.png" alt></p>
+<ul>
+<li><p><strong>Topologies</strong>：Computing topology, also known as a storm task.</p>
+<p>（计算拓扑，也称之为一个storm任务）</p>
+</li>
+<li><p><strong>Spouts</strong>：Message source for topology.</p>
+<p>（拓扑的消息源）</p>
+</li>
+<li><p><strong>Bolts</strong>：Logical unit of topology processing.</p>
+<p>（拓扑的处理逻辑单位）</p>
+</li>
+<li><p><strong>Tuples</strong>：Message tuple. Message tuple, the format used to send messages.</p>
+<p>（消息元组。发送消息所使用的格式）</p>
+</li>
+<li><p><strong>Streams</strong>：Data stream.</p>
+<p>（数据流）</p>
+</li>
+<li><p><strong>Streams groupings</strong>：Grouping strategy of data flow.</p>
+<p>（数据流的分组策略）</p>
+</li>
+<li><p><strong>Tasks</strong>：Task processing unit. Each spin and bolt is executed by several tasks.</p>
+<p>（任务处理单位。每个 Spout 和 Bolt 都由若干个task来执行。）</p>
+</li>
+<li><p><strong>Executor</strong>：Worker threads.One task corresponds to one executor.</p>
+<p>（工作线程。一个task对应一个executor）</p>
+</li>
+<li><p><strong>Workers</strong>：Worker process.A worker has one or more tasks.</p>
+<p>（工作进程。一个worker有着一个或多个task）</p>
+</li>
+<li><p><strong>Configuration</strong>：Configuration of topology.</p>
+<p>（拓扑的配置）</p>
+</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r='JacksonYuu.github.io'
+        data-o='JacksonYuu'
+        data-a='JacksonYuu'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
