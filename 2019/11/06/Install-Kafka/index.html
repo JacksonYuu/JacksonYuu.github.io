@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Install Kafka - JacksonYuu - Personal Blog</title>
+    <title>Install Kafka&lt;br&gt;（安装Kafka） - JacksonYuu - Personal Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    
+    <meta name="description" content="This is a full distributed installation of Kafka. The first thing you need to prepare is the Java e,"> 
     <meta name="author" content="JacksonYuu"> 
     <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -35,7 +35,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;" data-url="https://JacksonYuu.github.io"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">Install Kafka</h3>
+    <h3 class="subtitle">Install Kafka<br>（安装Kafka）</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -53,14 +53,46 @@
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">Install Kafka</h1>
+        <h1 class="title">Install Kafka<br>（安装Kafka）</h1>
         <div class="stuff">
             <span>十一月 06, 2019</span>
             
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Install/">Install</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Kafka/">Kafka</a></li></ul>
+
 
         </div>
         <div class="content markdown">
-            
+            <p>This is a full distributed installation of Kafka. The first thing you need to prepare is the Java environment (1.8) and the zookeeper cluster.</p>
+<p>（这里介绍的是全分布式安装Kafka，首先需要准备的是java环境（1.8）以及zookeeper集群。）</p>
+<p>Download files（文件下载）：<a href="https://pan.baidu.com/s/1dRdSVNYzHYyQkKcQPVFykA" target="_blank" rel="noopener">https://pan.baidu.com/s/1dRdSVNYzHYyQkKcQPVFykA</a> </p>
+<p>Extraction Code（提取码）：zujf</p>
+<h3 id="1、first（第一步）"><a href="#1、first（第一步）" class="headerlink" title="1、first（第一步）"></a>1、first（第一步）</h3><p>Upload the tar package downloaded from windows to the virtual machine (using CentOS 7.0 here) and then use （将windows下载的tar包上传到虚拟机（这里使用的是CentOS7.0）当中，之后在使用）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u77-linux-x64.tar.gz -C /usr/local/hadoop</span><br><span class="line"></span><br><span class="line">tar -zxvf zookeeper-3.4.14.tar.gz -C /usr/local/hadoop</span><br><span class="line"></span><br><span class="line">tar -zxvf kafka_2.11-2.2.0.tgz -C /usr/local/hadoop</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、second（第二步）"><a href="#2、second（第二步）" class="headerlink" title="2、second（第二步）"></a>2、second（第二步）</h3><p>Configuration of environmental variables（配置好环境变量）</p>
+<p>Add to /etc/profile:（向/etc/profile中添加：）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/hadoop/jdk1.8.0_77</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line"></span><br><span class="line">export ZOOKEEPER_HOME=/usr/local/hadoop/zookeeper-3.4.14</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$ZOOKEEPER_HOME/bin</span><br><span class="line"></span><br><span class="line">export KAFKA_HOME=/usr/local/hadoop/kafka_2.11-2.2.0</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$KAFKA_HOME/bin</span><br></pre></td></tr></table></figure>
+
+<p>Use after adding:（添加完成之后使用：）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile（使环境变量生效）</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、third（第三步）"><a href="#3、third（第三步）" class="headerlink" title="3、third（第三步）"></a>3、third（第三步）</h3><p>Enter the unzipped folder of zookeeper, create two folders, one for storing data and one for storing datalog, and then change the zoo_example.cfg under the conf directory to zoo.cfg and modify the content.</p>
+<p>（进入zookeeper的解压后的文件夹中，创建两个文件夹，一个用来存放data，一个用来存放dataLog，之后在修改conf目录下面的zoo_example.cfg为zoo.cfg并修改内容之。）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hadoop/zookeeper-3.4.14</span><br><span class="line"></span><br><span class="line">mkdir data dataLog</span><br><span class="line"></span><br><span class="line">cd conf</span><br><span class="line"></span><br><span class="line">mv zoo_example.cfg zoo.cfg</span><br><span class="line"></span><br><span class="line">vi zoo.cfg</span><br><span class="line"></span><br><span class="line">dataDir=/usr/local/hadoop/zookeeper-3.4.14/data</span><br><span class="line"></span><br><span class="line">dataLogDir=/usr/local/hadoop/zookeeper-3.4.14/dataLog</span><br><span class="line"></span><br><span class="line">server.1=hadoop1:2888:3888</span><br><span class="line"></span><br><span class="line">server.2=hadoop2:2888:3888</span><br><span class="line"></span><br><span class="line">server.3=hadoop3:2888:3888</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、fourth（第四步）"><a href="#4、fourth（第四步）" class="headerlink" title="4、fourth（第四步）"></a>4、fourth（第四步）</h3><p>Enter the decompression package of storm and create a folder to store the log files of Kafka. Modify the server.properties file in the config directory.</p>
+<p>（进入storm的解压包中创建一个文件夹存放kafka的日志文件。修改config目录下的server.properties文件。）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hadoop/kafka_2.11-2.2.0</span><br><span class="line"></span><br><span class="line">mkdir logs</span><br><span class="line"></span><br><span class="line">vi config/server.properties</span><br><span class="line"></span><br><span class="line">log.dirs=/opt/hadoop/kafka_2.11-2.2.0/logs</span><br><span class="line"></span><br><span class="line">zookeeper.connect=hadoop1:2181,hadoop2:2181,hadoop3:2181</span><br></pre></td></tr></table></figure>
+
+<h3 id="5、fifth（第五步）"><a href="#5、fifth（第五步）" class="headerlink" title="5、fifth（第五步）"></a>5、fifth（第五步）</h3><p>Distribute the extracted installation package to the remaining zookeeper cluster nodes (also Kafka cluster), and use the following command.</p>
+<p>（将解压的安装包分发给其余的zookeeper集群节点（同时也是Kafka集群），并使用以下命令。）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">scp -r /usr/local/hadoop hadoop2:/usr/local</span><br><span class="line"></span><br><span class="line">scp /etc/profile hadoop2:/etc/profile</span><br><span class="line"></span><br><span class="line">source /etc/profile（在其他节点使用，将环境生效）</span><br><span class="line"></span><br><span class="line">echo 1 &gt; /usr/local/hadoop/zookeeper-3.4.14/data/myid（代号为server.*）</span><br><span class="line"></span><br><span class="line">systemctl stop firewalld（将各个节点的防火墙关闭）</span><br><span class="line"></span><br><span class="line">systemctl disable firewalld（解除防火墙开机自启）</span><br><span class="line"></span><br><span class="line">vi /usr/local/hadoop/kafka_2.11-2.2.0/config/server.properties</span><br><span class="line"></span><br><span class="line">broker.id=1（定义broker的id，每个节点的名称都要不一样）</span><br></pre></td></tr></table></figure>
+
+<h3 id="6、sixth（第六步）"><a href="#6、sixth（第六步）" class="headerlink" title="6、sixth（第六步）"></a>6、sixth（第六步）</h3><p>Start the process in the following order and try to see if the installation is successful.</p>
+<p>（依照以下命令先后顺序启动进程并试用是否安装成功。）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh start （启动zookeeper集群，每个zookeeper节点都要运行）</span><br><span class="line"></span><br><span class="line">cd /usr/local/hadoop/kafka_2.11-2.2.0/config</span><br><span class="line"></span><br><span class="line">kafka-server-start.sh server.properties（每个Kafka节点都要启动）</span><br><span class="line"></span><br><span class="line">kafka-topics.sh --zookeeper hadoop1:2181 \</span><br><span class="line">--partitions 1 --replication-factor 2 --create --topic mygrils</span><br><span class="line">（--zookeeper：指定zookeeper的地址</span><br><span class="line">--partitions：指定创建的topic分区个数</span><br><span class="line">--replication-factor：指定每一个分区的备份数量）</span><br><span class="line"></span><br><span class="line">kafka-topics.sh --zookeeper hadoop1:2181 --list</span><br><span class="line">（查看该zookeeper集群下面的topic）</span><br><span class="line"></span><br><span class="line">kafka-console-producer.sh --broker-list hadoop1:9020 \</span><br><span class="line">--topic myboys</span><br><span class="line">（--broker-list：启动监听端口，配置信息中设置，默认9092端口）</span><br><span class="line"></span><br><span class="line">kafka-console-consumer.sh --bootstrap-server hadoop1:9092 \</span><br><span class="line">--topic myboys</span><br><span class="line">（--bootstrap-server：设置订阅的端口信息）</span><br><span class="line"></span><br><span class="line">向producer写入信息，能够在consumer中实时收到，即为成功</span><br></pre></td></tr></table></figure>
+
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
