@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Use Redis&lt;br&gt;（使用Redis） - JacksonYuu - Personal Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="1、String12345678910111213141516171819202122232425262728293031323334353637383940414243[root@hadoop1 ,"> 
+    <meta name="author" content="JacksonYuu"> 
+    <link rel="alternative" href="atom.xml" title="JacksonYuu - Personal Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">JacksonYuu - Personal Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://JacksonYuu.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Use Redis<br>（使用Redis）</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Use Redis<br>（使用Redis）</h1>
+        <div class="stuff">
+            <span>十一月 18, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Redis/">Redis</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Use/">Use</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="1、String"><a href="#1、String" class="headerlink" title="1、String"></a>1、String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 redis]# ./redis-server 1&gt;/dev/redis 2&gt;&amp;1 &amp;</span><br><span class="line">[1] 7451</span><br><span class="line">[root@hadoop1 redis]# ./redis-cli </span><br><span class="line">127.0.0.1:6379&gt; get a</span><br><span class="line">(nil)</span><br><span class="line">127.0.0.1:6379&gt; set a a（都会被替换value）</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get a</span><br><span class="line">&quot;a&quot;</span><br><span class="line">127.0.0.1:6379&gt; set a abc NX（存在就不会替换value）</span><br><span class="line">(nil)</span><br><span class="line">127.0.0.1:6379&gt; get a </span><br><span class="line">&quot;a&quot;</span><br><span class="line">127.0.0.1:6379&gt; set a abc XX（都会被替换value）</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get a</span><br><span class="line">&quot;abc&quot;</span><br><span class="line">127.0.0.1:6379&gt; del a（将key为a的键值对删除）</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; set number 10</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; incr number（让key为number的value转化为Integer并加一）</span><br><span class="line">(integer) 11</span><br><span class="line">127.0.0.1:6379&gt; get number</span><br><span class="line">&quot;11&quot;</span><br><span class="line">127.0.0.1:6379&gt; incrby number 50（让value加上50）</span><br><span class="line">(integer) 61</span><br><span class="line">127.0.0.1:6379&gt; get number</span><br><span class="line">&quot;61&quot;</span><br><span class="line">127.0.0.1:6379&gt; decr number（让key为number的value转化为Integer并减一）</span><br><span class="line">(integer) 60</span><br><span class="line">127.0.0.1:6379&gt; get number</span><br><span class="line">&quot;60&quot;</span><br><span class="line">127.0.0.1:6379&gt; decrby number 50（让value减去50）</span><br><span class="line">(integer) 10</span><br><span class="line">127.0.0.1:6379&gt; get number</span><br><span class="line">&quot;10&quot;</span><br><span class="line">127.0.0.1:6379&gt; mset 1 a 2 b 3 c（同时设置多个key-value）</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; mget 1 2 3（同时取得多个value）</span><br><span class="line">1) &quot;a&quot;</span><br><span class="line">2) &quot;b&quot;</span><br><span class="line">3) &quot;c&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、List"><a href="#2、List" class="headerlink" title="2、List"></a>2、List</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush list a（在列表的右边添加元素）</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; lpush list b（在列表的左边添加元素）</span><br><span class="line">(integer) 2</span><br><span class="line">127.0.0.1:6379&gt; lrange list 0 -1（查看列表元素，0为第一，-1为倒一，-2为倒二）</span><br><span class="line">1) &quot;b&quot;</span><br><span class="line">2) &quot;a&quot;</span><br><span class="line">127.0.0.1:6379&gt; rpush list 1 2 3 4 5（多个元素一同添加列表）</span><br><span class="line">(integer) 7</span><br><span class="line">127.0.0.1:6379&gt; del list（删除列表以列表信息）</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; get list</span><br><span class="line">(nil)</span><br><span class="line">127.0.0.1:6379&gt; rpush list a b c</span><br><span class="line">(integer) 3</span><br><span class="line">127.0.0.1:6379&gt; lrange list 0 -1</span><br><span class="line">1) &quot;a&quot;</span><br><span class="line">2) &quot;b&quot;</span><br><span class="line">3) &quot;c&quot;</span><br><span class="line">127.0.0.1:6379&gt; rpop list（在列表的右边删除元素）</span><br><span class="line">&quot;c&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange list 0 -1</span><br><span class="line">1) &quot;a&quot;</span><br><span class="line">2) &quot;b&quot;</span><br><span class="line">127.0.0.1:6379&gt; lpop list（在列表的左边删除元素）</span><br><span class="line">&quot;a&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange list 0 -1</span><br><span class="line">1) &quot;b&quot;</span><br><span class="line">127.0.0.1:6379&gt; brpop mylist 1（在1s中取到列表信息并返回，返回后列表将不存在）</span><br><span class="line">(nil)</span><br><span class="line">(1.02s)</span><br><span class="line">127.0.0.1:6379&gt; brpop list 1</span><br><span class="line">1) &quot;list&quot;</span><br><span class="line">2) &quot;b&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、Hash"><a href="#3、Hash" class="headerlink" title="3、Hash"></a>3、Hash</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hset test:1 username wangwu（存单条信息）</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; hget test:1 username（取单条信息）</span><br><span class="line">&quot;wangwu&quot;</span><br><span class="line">127.0.0.1:6379&gt; hmset test:1 username laoliu age 20 height 170 weight 60（一次存多条信息）</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; hmget test:1 username age height weight（一次取多条信息）</span><br><span class="line">1) &quot;laoliu&quot;</span><br><span class="line">2) &quot;20&quot;</span><br><span class="line">3) &quot;170&quot;</span><br><span class="line">4) &quot;60&quot;</span><br><span class="line">127.0.0.1:6379&gt; hgetall test:1（将hash表中所有信息都查出）</span><br><span class="line">1) &quot;username&quot;</span><br><span class="line">2) &quot;laoliu&quot;</span><br><span class="line">3) &quot;age&quot;</span><br><span class="line">4) &quot;20&quot;</span><br><span class="line">5) &quot;height&quot;</span><br><span class="line">6) &quot;170&quot;</span><br><span class="line">7) &quot;weight&quot;</span><br><span class="line">8) &quot;60&quot;</span><br><span class="line">127.0.0.1:6379&gt; hincrby test:1 height 10（将数据转化为Integer并加10）</span><br><span class="line">(integer) 180</span><br><span class="line">127.0.0.1:6379&gt; hget test:1 height</span><br><span class="line">&quot;180&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、Set"><a href="#4、Set" class="headerlink" title="4、Set"></a>4、Set</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd mytest 1 2 3（创建一个无序集合）</span><br><span class="line">(integer) 3</span><br><span class="line">127.0.0.1:6379&gt; smembers mytest（查看集合中所有信息）</span><br><span class="line">1) &quot;1&quot;</span><br><span class="line">2) &quot;2&quot;</span><br><span class="line">3) &quot;3&quot;</span><br><span class="line">127.0.0.1:6379&gt; sismember mytest 3（查找长度为3，名称为mytest的集合</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sismember mytest 4 找到返回1，没找到返回0）</span><br><span class="line">(integer) 0</span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r='JacksonYuu.github.io'
+        data-o='JacksonYuu'
+        data-a='JacksonYuu'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
